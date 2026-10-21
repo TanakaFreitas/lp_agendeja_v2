@@ -19,6 +19,7 @@ Site estático em Astro publicado em **https://lp.agendeja.app.br/**. O contrato
 - **Preços, limites de profissionais e dias de teste:** `src/data/planos.ts`. Cards, textos e JSON-LD leem daqui.
 - **URLs do app e do WhatsApp:** `src/data/links.ts`. Não acrescente rotas do app que não existam.
 - **Perguntas frequentes:** `src/data/faq.ts`.
+- **Blog:** um `.md` por artigo em `src/content/blog/` (frontmatter `title`, `description`, `pubDate`; o nome do arquivo vira `/blog/<nome>/`). O texto segue as mesmas regras do briefing (§6 e §9), e o `check:copy` confere os artigos também.
 - **Cores, espaçamento e raios:** tokens em `src/styles/global.css` (claro em `:root`, escuro redefinido logo abaixo).
 - **Telas do app:** são mockups em HTML/CSS em `src/components/mockups/`, não screenshots.
 - **Prova social:** `src/components/ProvaSocial.astro` está pronto, mas fora da página. Só entra com depoimentos reais e autorizados.

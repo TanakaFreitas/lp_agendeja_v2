@@ -4,16 +4,17 @@ import Icon from './Icon.astro';
 import { CADASTRO, LOGIN } from '../data/links';
 
 const nav = [
-  { href: '#funcionalidades', label: 'Funcionalidades' },
-  { href: '#planos', label: 'Planos' },
-  { href: '#duvidas', label: 'Dúvidas' },
+  { href: '/#funcionalidades', label: 'Funcionalidades' },
+  { href: '/#planos', label: 'Planos' },
+  { href: '/#duvidas', label: 'Dúvidas' },
+  { href: '/blog/', label: 'Blog' },
 ];
 ---
 
 <header class="site-header">
   <div class="pole-strip" aria-hidden="true"></div>
   <div class="container bar">
-    <a class="brand" href="#topo" aria-label="Agende Já, voltar ao topo">
+    <a class="brand" href="/#topo" aria-label="Agende Já, página inicial">
       <Logo size={40} alt="" />
       <span class="brand-name">Agende Já</span>
     </a>

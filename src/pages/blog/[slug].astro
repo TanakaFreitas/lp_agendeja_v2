@@ -1,0 +1,224 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Icon from '../../components/Icon.astro';
+import CtaFinal from '../../components/CtaFinal.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE } from '../../data/links';
+import { artigos, formatarData, minutosDeLeitura, urlDoArtigo, type Artigo } from '../../data/blog';
+
+export async function getStaticPaths() {
+  const lista = await artigos();
+  return lista.map((artigo) => ({
+    params: { slug: artigo.id },
+    props: { artigo, outros: lista.filter((a) => a.id !== artigo.id) },
+  }));
+}
+
+interface Props {
+  artigo: Artigo;
+  outros: Artigo[];
+}
+
+const { artigo, outros } = Astro.props;
+const { title, description, pubDate, updatedDate } = artigo.data;
+const { Content } = await render(artigo);
+
+const canonical = new URL(urlDoArtigo(artigo), SITE).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description,
+  datePublished: pubDate.toISOString(),
+  dateModified: (updatedDate ?? pubDate).toISOString(),
+  inLanguage: 'pt-BR',
+  image: new URL('/og/SocialShareImage.png', SITE).href,
+  mainEntityOfPage: canonical,
+  author: { '@type': 'Organization', name: 'Agende Já', url: SITE },
+  publisher: { '@type': 'Organization', name: 'Agende Já', url: SITE },
+};
+---
+
+<Base title={`${title} — Blog Agende Já`} description={description} canonical={canonical} ogType="article" jsonLd={jsonLd}>
+  <Header />
+  <main id="conteudo">
+    <article class="section" aria-labelledby="artigo-title">
+      <div class="container coluna">
+        <a class="voltar text-link" href="/blog/">
+          <Icon name="arrowLeft" size={18} />
+          Blog
+        </a>
+        <header class="cabeca">
+          <h1 id="artigo-title">{title}</h1>
+          <p class="lead">{description}</p>
+          <p class="meta">
+            <time datetime={pubDate.toISOString()}>{formatarData(pubDate)}</time>
+            <span aria-hidden="true">·</span>
+            <span>{minutosDeLeitura(artigo.body)} min de leitura</span>
+          </p>
+        </header>
+
+        <div class="prose">
+          <Content />
+        </div>
+      </div>
+    </article>
+
+    {
+      outros.length > 0 && (
+        <section class="section section--surface" aria-labelledby="outros-title">
+          <div class="container coluna">
+            <h2 id="outros-title" class="outros-title">Leia também</h2>
+            <ul class="outros" role="list">
+              {outros.map((a) => (
+                <li>
+                  <a href={urlDoArtigo(a)}>
+                    <span>{a.data.title}</span>
+                    <Icon name="chevronRight" size={20} />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )
+    }
+    <CtaFinal />
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .coluna {
+    max-width: calc(68ch + 2 * var(--s-32));
+  }
+
+  .voltar {
+    gap: var(--s-4);
+    margin-bottom: var(--s-24);
+    text-decoration: none;
+  }
+
+  .cabeca {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-16);
+    padding-bottom: var(--s-32);
+    margin-bottom: var(--s-32);
+    border-bottom: 1px solid var(--border);
+  }
+
+  h1 {
+    font-size: clamp(1.875rem, 1.3rem + 2.4vw, 2.75rem);
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-8);
+    font-size: 0.875rem;
+    color: var(--text-muted);
+  }
+
+  /* HTML vindo do markdown: precisa de :global, o scoping do Astro não chega nele. */
+  .prose {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+  }
+
+  .prose > :global(* + *) {
+    margin-top: var(--s-16);
+  }
+
+  .prose :global(h2) {
+    margin-top: var(--s-48);
+    font-size: clamp(1.375rem, 1.1rem + 1vw, 1.75rem);
+  }
+
+  .prose :global(h3) {
+    margin-top: var(--s-32);
+    font-size: 1.25rem;
+  }
+
+  .prose :global(h2 + *),
+  .prose :global(h3 + *) {
+    margin-top: var(--s-12);
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    padding-left: var(--s-24);
+  }
+
+  .prose :global(li + li) {
+    margin-top: var(--s-8);
+  }
+
+  .prose :global(li::marker) {
+    color: var(--tertiary);
+  }
+
+  .prose :global(strong) {
+    font-weight: 600;
+  }
+
+  .prose :global(a) {
+    font-weight: 600;
+    text-underline-offset: 3px;
+  }
+
+  .prose :global(blockquote) {
+    margin-inline: 0;
+    padding: var(--s-16) var(--s-24);
+    border-left: 4px solid var(--secondary);
+    border-radius: 0 var(--r-8) var(--r-8) 0;
+    background: var(--gold-tint);
+  }
+
+  .prose :global(hr) {
+    margin-block: var(--s-48);
+    border: 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .outros-title {
+    font-size: 1.5rem;
+    margin-bottom: var(--s-16);
+  }
+
+  .outros {
+    list-style: none;
+    border-top: 1px solid var(--border);
+  }
+
+  .outros li {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .outros a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-16);
+    min-height: 56px;
+    padding-block: var(--s-12);
+    color: var(--text);
+    font-family: var(--font-title);
+    font-size: 1.125rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .outros a:hover span {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .outros a :global(svg) {
+    flex: none;
+    color: var(--primary-link);
+  }
+</style>

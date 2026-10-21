@@ -12,12 +12,17 @@ import { planos, DIAS_TESTE } from '../data/planos';
 interface Props {
   title: string;
   description: string;
+  /** URL absoluta da página. Padrão: a home. */
+  canonical?: string;
+  ogType?: 'website' | 'article';
+  /** Dados estruturados da página. Padrão: o SoftwareApplication com os planos. */
+  jsonLd?: Record<string, unknown>;
 }
 
-const { title, description } = Astro.props;
+const { title, description, canonical = SITE, ogType = 'website' } = Astro.props;
 const ogImage = new URL('/og/SocialShareImage.png', SITE).href;
 
-const jsonLd = {
+const jsonLd = Astro.props.jsonLd ?? {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
   name: 'Agende Já',
@@ -44,7 +49,7 @@ const jsonLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={SITE} />
+    <link rel="canonical" href={canonical} />
 
     <meta name="theme-color" content="#F1F4F8" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0B191E" media="(prefers-color-scheme: dark)" />
@@ -58,12 +63,12 @@ const jsonLd = {
 
     <link rel="preload" href={urbanist700} as="font" type="font/woff2" crossorigin />
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:site_name" content="Agende Já" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={SITE} />
+    <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />

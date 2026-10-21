@@ -1,0 +1,163 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Icon from '../../components/Icon.astro';
+import CtaFinal from '../../components/CtaFinal.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE } from '../../data/links';
+import { artigos, formatarData, minutosDeLeitura, urlDoArtigo } from '../../data/blog';
+
+const lista = await artigos();
+
+const title = 'Blog do Agende Já — dicas para barbearias';
+const description =
+  'Dicas práticas para o dono de barbearia: organizar a agenda, preencher horários vagos e reduzir as faltas de clientes.';
+const canonical = new URL('blog/', SITE).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'Blog do Agende Já',
+  url: canonical,
+  description,
+  inLanguage: 'pt-BR',
+  publisher: { '@type': 'Organization', name: 'Agende Já', url: SITE },
+};
+---
+
+<Base title={title} description={description} canonical={canonical} jsonLd={jsonLd}>
+  <Header />
+  <main id="conteudo">
+    <section class="section" aria-labelledby="blog-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Blog</span>
+          <h1 id="blog-title" class="section-title">Dicas para a sua barbearia</h1>
+          <p class="lead">Agenda, horário vago, cliente que falta. O que dá para fazer no dia a dia do balcão.</p>
+        </div>
+
+        <ul class="grid" role="list">
+          {
+            lista.map((a) => (
+              <li class="card post">
+                <p class="meta">
+                  <time datetime={a.data.pubDate.toISOString()}>{formatarData(a.data.pubDate)}</time>
+                  <span aria-hidden="true">·</span>
+                  <span>{minutosDeLeitura(a.body)} min de leitura</span>
+                </p>
+                <h2>
+                  <a href={urlDoArtigo(a)}>{a.data.title}</a>
+                </h2>
+                <p class="desc">{a.data.description}</p>
+                <span class="more" aria-hidden="true">
+                  Ler artigo
+                  <Icon name="arrowRight" size={18} />
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+    <CtaFinal />
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .grid {
+    display: grid;
+    gap: var(--s-24);
+    list-style: none;
+  }
+
+  .post {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-12);
+    padding: var(--s-24);
+    transition:
+      border-color 0.15s ease,
+      transform 0.15s ease;
+  }
+
+  .post:hover {
+    border-color: var(--secondary);
+    transform: translateY(-2px);
+  }
+
+  .post:focus-within {
+    border-color: var(--primary-link);
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-8);
+    font-size: 0.875rem;
+    color: var(--text-muted);
+  }
+
+  h2 {
+    font-size: 1.375rem;
+  }
+
+  h2 a {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  /* O card inteiro é clicável, mas só o título é o link (um alvo por card para leitor de tela). */
+  h2 a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--r-16);
+  }
+
+  h2 a:focus-visible {
+    outline: none;
+  }
+
+  h2 a:focus-visible::after {
+    outline: 3px solid var(--primary-link);
+    outline-offset: 3px;
+  }
+
+  .desc {
+    color: var(--text-muted);
+  }
+
+  .more {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-8);
+    margin-top: auto;
+    padding-top: var(--s-8);
+    color: var(--primary-link);
+    font-weight: 600;
+  }
+
+  @media (min-width: 768px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .post {
+      transition: none;
+    }
+
+    .post:hover {
+      transform: none;
+    }
+  }
+</style>
