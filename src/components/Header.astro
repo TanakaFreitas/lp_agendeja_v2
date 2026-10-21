@@ -1,0 +1,205 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { CADASTRO, LOGIN } from '../data/links';
+
+const nav = [
+  { href: '#funcionalidades', label: 'Funcionalidades' },
+  { href: '#planos', label: 'Planos' },
+  { href: '#duvidas', label: 'Dúvidas' },
+];
+---
+
+<header class="site-header">
+  <div class="pole-strip" aria-hidden="true"></div>
+  <div class="container bar">
+    <a class="brand" href="#topo" aria-label="Agende Já, voltar ao topo">
+      <Logo size={40} alt="" />
+      <span class="brand-name">Agende Já</span>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Seções">
+      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+
+    <div class="actions">
+      <a class="login" href={LOGIN}>Entrar</a>
+      <a class="btn btn--primary cta" href={CADASTRO}>Testar grátis</a>
+
+      <details class="nav-mobile">
+        <summary aria-label="Abrir menu">
+          <Icon name="menu" />
+        </summary>
+        <nav class="menu card" aria-label="Seções">
+          {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+          <a class="menu-login" href={LOGIN}>Entrar</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  // Fecha o menu <details> ao escolher uma seção. Sem este script o menu funciona igual, só fica aberto.
+  document.querySelector('.nav-mobile')?.addEventListener('click', (e) => {
+    if (e.target instanceof Element && e.target.closest('a')) e.currentTarget.removeAttribute('open');
+  });
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--surface) 92%, transparent);
+    backdrop-filter: saturate(1.4) blur(10px);
+    -webkit-backdrop-filter: saturate(1.4) blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pole-strip {
+    height: 4px;
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: var(--s-16);
+    height: var(--header-h);
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-12);
+    min-height: 44px;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .brand-name {
+    font-family: var(--font-title);
+    font-size: 1.25rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .nav-desktop {
+    display: none;
+    gap: var(--s-4);
+    margin-left: var(--s-24);
+  }
+
+  .nav-desktop a,
+  .login {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-inline: var(--s-12);
+    border-radius: var(--r-8);
+    color: var(--text-muted);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .nav-desktop a:hover,
+  .login:hover {
+    color: var(--text);
+    background: var(--primary-tint);
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: var(--s-8);
+    margin-left: auto;
+  }
+
+  .login {
+    display: none;
+    color: var(--primary-link);
+    font-weight: 600;
+  }
+
+  .cta {
+    min-height: 44px;
+    padding-inline: var(--s-16);
+    font-size: 0.9375rem;
+  }
+
+  .nav-mobile {
+    position: relative;
+  }
+
+  .nav-mobile summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--r-8);
+    color: var(--text);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .nav-mobile summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .nav-mobile[open] summary {
+    background: var(--primary-tint);
+  }
+
+  .menu {
+    position: absolute;
+    right: 0;
+    top: calc(100% + var(--s-8));
+    display: flex;
+    flex-direction: column;
+    min-width: 220px;
+    padding: var(--s-8);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .menu a {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding-inline: var(--s-12);
+    border-radius: var(--r-8);
+    color: var(--text);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .menu a:hover {
+    background: var(--primary-tint);
+  }
+
+  @media (max-width: 380px) {
+    .brand-name {
+      display: none;
+    }
+  }
+
+  @media (min-width: 640px) {
+    .login {
+      display: inline-flex;
+    }
+
+    .menu-login {
+      display: none !important;
+    }
+  }
+
+  @media (min-width: 960px) {
+    .nav-desktop {
+      display: flex;
+    }
+
+    .nav-mobile {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,176 @@
+---
+import Icon from './Icon.astro';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+import MockHorarios from './mockups/MockHorarios.astro';
+import MockAgendaAdmin from './mockups/MockAgendaAdmin.astro';
+import { CADASTRO, whatsapp } from '../data/links';
+import { DIAS_TESTE } from '../data/planos';
+---
+
+<section class="hero" id="topo" aria-labelledby="hero-title">
+  <div class="container grid">
+    <div class="copy">
+      <p class="tag">Agendamento online para barbearias</p>
+      <h1 id="hero-title">Agenda cheia, sem responder “tem horário?” o dia inteiro</h1>
+      <p class="sub">
+        Seu cliente vê os horários livres e agenda sozinho pelo link da barbearia. Ele e o profissional recebem a
+        confirmação no WhatsApp, e o cliente ainda ganha um lembrete antes do horário.
+      </p>
+      <div class="ctas">
+        <a class="btn btn--light btn--lg" href={CADASTRO}>
+          Testar grátis por {DIAS_TESTE} dias
+          <Icon name="arrowRight" />
+        </a>
+        <a class="btn btn--ghost-light btn--lg" href={whatsapp()} target="_blank" rel="noopener">
+          <WhatsAppIcon />
+          Falar no WhatsApp
+        </a>
+      </div>
+      <ul class="support">
+        <li><Icon name="check" size={18} />Sem cartão</li>
+        <li><Icon name="check" size={18} />Funciona no navegador</li>
+        <li><Icon name="check" size={18} />Instala na tela inicial como app</li>
+      </ul>
+    </div>
+
+    <div class="visual">
+      <MockAgendaAdmin class="back" />
+      <MockHorarios class="front" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--primary);
+    color: var(--on-primary);
+    padding-block: var(--s-48) 0;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0;
+    height: 96px;
+    background: var(--bg);
+  }
+
+  .grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: var(--s-48);
+  }
+
+  .copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-24);
+  }
+
+  .tag {
+    align-self: flex-start;
+    padding: var(--s-4) var(--s-12);
+    border: 1px solid rgb(146 129 99 / 0.7);
+    border-radius: var(--r-pill);
+    color: var(--on-primary-muted);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  h1 {
+    font-size: clamp(2.125rem, 1.4rem + 3.6vw, 3.75rem);
+    letter-spacing: -0.01em;
+  }
+
+  .sub {
+    max-width: 36rem;
+    font-size: 1.125rem;
+    color: var(--on-primary-muted);
+  }
+
+  .ctas {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-12);
+  }
+
+  .support {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-8) var(--s-24);
+    color: var(--on-primary-muted);
+    font-size: 0.9375rem;
+    font-weight: 500;
+  }
+
+  .support li {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-8);
+  }
+
+  .support svg {
+    color: #ffffff;
+  }
+
+  .visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding-bottom: var(--s-32);
+  }
+
+  .visual :global(.phone) {
+    max-width: 280px;
+  }
+
+  .visual :global(.back) {
+    display: none;
+  }
+
+  @media (min-width: 560px) {
+    .ctas {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (min-width: 960px) {
+    .hero {
+      padding-top: var(--s-96);
+    }
+
+    .grid {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      align-items: center;
+      gap: var(--s-64);
+    }
+
+    .copy {
+      padding-bottom: calc(var(--s-96) + var(--s-48));
+    }
+
+    .visual {
+      min-height: 640px;
+      padding-bottom: var(--s-48);
+    }
+
+    .visual :global(.back) {
+      display: block;
+      position: absolute;
+      top: 40px;
+      right: 50%;
+      transform: translateX(-8%) rotate(-4deg) scale(0.92);
+      opacity: 0.95;
+    }
+
+    .visual :global(.front) {
+      position: relative;
+      transform: translateX(28%);
+    }
+  }
+</style>

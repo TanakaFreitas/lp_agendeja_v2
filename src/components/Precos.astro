@@ -1,0 +1,218 @@
+---
+import Icon from './Icon.astro';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+import { CADASTRO, whatsapp } from '../data/links';
+import { planos, DIAS_TESTE, rotuloProfissionais } from '../data/planos';
+
+const inclusos = [
+  'Agendamentos ilimitados',
+  'Confirmação e lembrete no WhatsApp',
+  'Planos de assinatura para os seus clientes',
+  'Todas as funcionalidades',
+];
+---
+
+<section class="section section--surface" id="planos" aria-labelledby="precos-title">
+  <div class="container">
+    <div class="section-head section-head--center">
+      <span class="eyebrow">Planos e preços</span>
+      <h2 id="precos-title" class="section-title">Comece com {DIAS_TESTE} dias grátis</h2>
+      <p class="lead">
+        Todos os planos têm as mesmas funcionalidades. A diferença é só a quantidade de profissionais ativos.
+        Não pede cartão.
+      </p>
+    </div>
+
+    <ul class="grid">
+      {
+        planos.map((p) => (
+          <li class:list={['plano', { destaque: p.destaque }]}>
+            {p.destaque && <span class="selo">Recomendado</span>}
+            <h3>{p.nome}</h3>
+            <p class="resumo">{p.resumo}</p>
+            <p class="preco">
+              <span class="valor">R$&nbsp;{p.preco}</span>
+              <span class="mes">/mês</span>
+            </p>
+            <p class="limite">
+              <Icon name="users" size={20} />
+              {rotuloProfissionais(p)}
+            </p>
+            <ul class="check-list">
+              {inclusos.map((i) => (
+                <li>
+                  <Icon name="check" />
+                  <span>{i}</span>
+                </li>
+              ))}
+            </ul>
+            <div class="acoes">
+              <a class:list={['btn', 'btn--block', p.destaque ? 'btn--primary' : 'btn--outline']} href={CADASTRO}>
+                Testar grátis por {DIAS_TESTE} dias
+              </a>
+              <a
+                class="text-link wa"
+                href={whatsapp(`Olá! Vim pelo site e quero assinar o plano ${p.nome} do Agende Já.`)}
+                target="_blank"
+                rel="noopener"
+              >
+                <WhatsAppIcon size={18} />
+                Assinar o {p.nome} pelo WhatsApp
+              </a>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+
+    <ul class="notas">
+      <li><Icon name="checkCircle" size={20} />{DIAS_TESTE} dias grátis em toda barbearia nova, criados no cadastro</li>
+      <li><Icon name="checkCircle" size={20} />Para assinar ou trocar de plano, fale com a gente pelo WhatsApp</li>
+      <li><Icon name="checkCircle" size={20} />Ao fim do teste, seus dados ficam guardados</li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .grid {
+    list-style: none;
+    display: grid;
+    gap: var(--s-24);
+    max-width: 26rem;
+    margin-inline: auto;
+  }
+
+  .plano {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-16);
+    padding: var(--s-32) var(--s-24) var(--s-24);
+    border: 1px solid var(--border);
+    border-radius: var(--r-24);
+    background: var(--bg);
+  }
+
+  .destaque {
+    border: 2px solid var(--secondary);
+    background: var(--surface);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .selo {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: var(--s-4) var(--s-16);
+    border-radius: var(--r-pill);
+    background: var(--secondary);
+    color: #0b191e;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .resumo {
+    margin-top: calc(var(--s-12) * -1);
+    color: var(--text-muted);
+  }
+
+  .preco {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s-4);
+  }
+
+  /* Dourado como texto só em tamanho grande (BRIEFING §8). */
+  .valor {
+    font-family: var(--font-title);
+    font-size: 2.75rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--secondary);
+  }
+
+  .mes {
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .limite {
+    display: flex;
+    align-items: center;
+    gap: var(--s-8);
+    padding: var(--s-12);
+    border-radius: var(--r-8);
+    background: var(--primary-tint);
+    font-weight: 600;
+  }
+
+  .check-list {
+    font-size: 0.9375rem;
+    gap: var(--s-8);
+  }
+
+  .check-list li > :global(svg) {
+    width: 18px;
+    height: 18px;
+    margin-top: 3px;
+  }
+
+  .acoes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-4);
+    margin-top: auto;
+    padding-top: var(--s-8);
+  }
+
+  .wa {
+    gap: var(--s-8);
+    font-size: 0.9375rem;
+  }
+
+  .notas {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-12);
+    max-width: 40rem;
+    margin: var(--s-48) auto 0;
+    color: var(--text-muted);
+  }
+
+  .notas li {
+    display: flex;
+    gap: var(--s-12);
+    align-items: flex-start;
+  }
+
+  .notas :global(svg) {
+    flex: none;
+    margin-top: 2px;
+    color: var(--success-text);
+  }
+
+  @media (min-width: 960px) {
+    .grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: stretch;
+      max-width: none;
+    }
+
+    .notas {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: none;
+      gap: var(--s-12) var(--s-32);
+    }
+  }
+</style>

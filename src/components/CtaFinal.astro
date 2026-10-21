@@ -1,0 +1,79 @@
+---
+import Icon from './Icon.astro';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+import Logo from './Logo.astro';
+import { CADASTRO, whatsapp } from '../data/links';
+import { DIAS_TESTE } from '../data/planos';
+---
+
+<section class="cta-final" aria-labelledby="cta-title">
+  <div class="pole-strip" aria-hidden="true"></div>
+  <div class="container inner">
+    <Logo size={72} loading="lazy" />
+    <h2 id="cta-title">Comece hoje a receber agendamentos pelo link</h2>
+    <p>Crie a conta, siga o guia de primeiros passos e divulgue o link. São {DIAS_TESTE} dias grátis, sem cartão.</p>
+    <div class="ctas">
+      <a class="btn btn--light btn--lg" href={CADASTRO}>
+        Criar minha barbearia
+        <Icon name="arrowRight" />
+      </a>
+      <a class="btn btn--ghost-light btn--lg" href={whatsapp()} target="_blank" rel="noopener">
+        <WhatsAppIcon />
+        Falar no WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-final {
+    background: var(--primary);
+    color: var(--on-primary);
+  }
+
+  .pole-strip {
+    height: 6px;
+  }
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-24);
+    padding-block: var(--s-64);
+    text-align: center;
+  }
+
+  h2 {
+    max-width: 22ch;
+    font-size: clamp(1.875rem, 1.3rem + 2.6vw, 3rem);
+  }
+
+  p {
+    max-width: 48ch;
+    font-size: 1.125rem;
+    color: var(--on-primary-muted);
+  }
+
+  .ctas {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-12);
+    width: 100%;
+    max-width: 22rem;
+  }
+
+  @media (min-width: 560px) {
+    .ctas {
+      flex-direction: row;
+      justify-content: center;
+      max-width: none;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .inner {
+      padding-block: var(--s-96);
+    }
+  }
+</style>

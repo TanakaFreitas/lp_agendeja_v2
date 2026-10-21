@@ -1,0 +1,89 @@
+---
+import Icon, { type IconName } from './Icon.astro';
+
+const dores: { icon: IconName; dor: string; solucao: string }[] = [
+  {
+    icon: 'notebook',
+    dor: 'Agenda no caderno, no WhatsApp ou de cabeça',
+    solucao:
+      'Tudo num lugar só: agendados do dia por profissional, agendamentos do mês com busca por cliente e o painel de ocupação da equipe.',
+  },
+  {
+    icon: 'bell',
+    dor: 'Cliente que esquece e falta',
+    solucao:
+      'O cliente recebe a confirmação e um lembrete antes do horário no WhatsApp. Faltou mesmo assim? Um toque em “Cliente faltou” e fica registrado.',
+  },
+  {
+    icon: 'clock',
+    dor: 'Horário vago no meio da tarde',
+    solucao:
+      'Divulgue o link da barbearia e deixe o cliente marcar a qualquer hora. Apareceu alguém no balcão? Use o encaixe rápido.',
+  },
+  {
+    icon: 'wallet',
+    dor: 'Quem pagou, quem tem plano, quanto entrou',
+    solucao:
+      'Registre o que recebeu em cada atendimento e veja os totais do mês por forma de pagamento. Cliente com plano? Um toque baixa o crédito.',
+  },
+];
+---
+
+<section class="section" aria-labelledby="dores-title">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">O dia a dia da barbearia</span>
+      <h2 id="dores-title" class="section-title">Menos mensagem, menos furo, mais cadeira ocupada</h2>
+    </div>
+
+    <ul class="grid">
+      {
+        dores.map((d) => (
+          <li class="card item">
+            <span class="icon-badge">
+              <Icon name={d.icon} />
+            </span>
+            <h3>{d.dor}</h3>
+            <p>{d.solucao}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .grid {
+    list-style: none;
+    display: grid;
+    gap: var(--s-16);
+  }
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-12);
+    padding: var(--s-24);
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  p {
+    color: var(--text-muted);
+  }
+
+  @media (min-width: 640px) {
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--s-24);
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+</style>

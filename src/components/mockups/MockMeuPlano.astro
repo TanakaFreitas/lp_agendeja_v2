@@ -1,0 +1,148 @@
+---
+import './mockup.css';
+import Icon from '../Icon.astro';
+
+interface Props {
+  class?: string;
+}
+---
+
+<div
+  class:list={['phone', Astro.props.class]}
+  role="img"
+  aria-label="Tela Meu plano do cliente: plano mensal com 3 de 4 créditos, vencimento, dias válidos, serviços cobertos e extrato."
+>
+  <div class="m-screen">
+    <div class="m-appbar">
+      <Icon name="chevronRight" class="flip" />
+      <span class="m-appbar-title">Meu plano</span>
+    </div>
+    <div class="m-body">
+      <div class="m-card plan">
+        <div class="m-row" style="justify-content: space-between">
+          <span class="m-title">Plano Mensal</span>
+          <span class="m-chip m-chip--success">Vigente</span>
+        </div>
+        <div class="m-row" style="align-items: baseline; gap: 6px">
+          <span class="big">3</span>
+          <span class="m-muted">de 4 créditos disponíveis</span>
+        </div>
+        <div class="m-progress" style="height: 8px"><span style="width: 75%"></span></div>
+        <div class="facts">
+          <span>
+            <span class="m-small m-muted" style="display:block">Vence em</span>
+            <span class="m-strong">09/10 · 19 dias</span>
+          </span>
+          <span>
+            <span class="m-small m-muted" style="display:block">Dias válidos</span>
+            <span class="m-strong">Seg a sex</span>
+          </span>
+        </div>
+        <div class="m-row" style="flex-wrap: wrap; gap: 6px">
+          <span class="m-chip">Corte masculino</span>
+          <span class="m-chip">Barba completa</span>
+        </div>
+      </div>
+
+      <div class="m-row" style="justify-content: space-between">
+        <span class="m-title">Extrato</span>
+        <span class="m-small m-muted">setembro</span>
+      </div>
+      <div class="m-card ext">
+        <div class="m-row mov">
+          <span class="dot"><Icon name="scissors" size={14} /></span>
+          <span class="m-grow">
+            <span class="m-strong" style="display:block">Corte masculino</span>
+            <span class="m-small m-muted">12/09 · Diego</span>
+          </span>
+          <span class="neg">−1</span>
+        </div>
+        <div class="m-row mov">
+          <span class="dot ok"><Icon name="gift" size={14} /></span>
+          <span class="m-grow">
+            <span class="m-strong" style="display:block">Crédito adicionado</span>
+            <span class="m-small m-muted">10/09 · cortesia</span>
+          </span>
+          <span class="pos">+1</span>
+        </div>
+        <div class="m-row mov">
+          <span class="dot bad"><Icon name="x" size={14} /></span>
+          <span class="m-grow">
+            <span class="m-strong" style="display:block">Cliente faltou</span>
+            <span class="m-small m-muted">02/09 · Barba completa</span>
+          </span>
+          <span class="neg">−1</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .flip {
+    transform: scaleX(-1);
+  }
+
+  .plan {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .big {
+    font-family: var(--font-title);
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .facts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .ext {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mov {
+    padding: 9px 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .mov:last-child {
+    border-bottom: 0;
+  }
+
+  .dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--r-pill);
+    background: var(--primary-tint);
+  }
+
+  .dot.ok {
+    background: var(--success-tint);
+    color: var(--success-text);
+  }
+
+  .dot.bad {
+    background: var(--error-tint);
+  }
+
+  .pos {
+    font-weight: 700;
+    color: var(--success-text);
+  }
+
+  .neg {
+    font-weight: 700;
+  }
+</style>

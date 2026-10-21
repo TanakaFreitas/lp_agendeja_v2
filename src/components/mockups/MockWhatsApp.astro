@@ -1,0 +1,98 @@
+---
+import './mockup.css';
+import Icon from '../Icon.astro';
+
+interface Props {
+  class?: string;
+}
+---
+
+<div
+  class:list={['phone', Astro.props.class]}
+  role="img"
+  aria-label="Exemplo ilustrativo de conversa no WhatsApp: o cliente recebe a confirmação do agendamento e, depois, um lembrete antes do horário."
+>
+  <div class="m-screen">
+    <div class="m-appbar">
+      <Icon name="chevronRight" class="flip" />
+      <span class="m-avatar">ZA</span>
+      <span class="m-appbar-title">Barbearia do Zé</span>
+    </div>
+    <div class="m-body thread">
+      <span class="stamp">Quinta-feira</span>
+      <div class="bubble">
+        <span class="m-strong" style="display:block">Agendamento confirmado</span>
+        Olá, Rafael! Seu horário na Barbearia do Zé está marcado.
+        <span class="detail">
+          <span><Icon name="scissors" size={13} /> Corte masculino com Diego</span>
+          <span><Icon name="calendar" size={13} /> Sábado, 26/09, às 10:00</span>
+        </span>
+        <span class="time">14:32</span>
+      </div>
+      <span class="stamp">Sábado</span>
+      <div class="bubble">
+        <span class="m-strong" style="display:block">Lembrete</span>
+        Rafael, seu horário com Diego é sábado, 26/09, às 10:00. Até lá!
+        <span class="time">08:00</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .flip {
+    transform: scaleX(-1);
+  }
+
+  .thread {
+    gap: 10px;
+    background:
+      radial-gradient(circle, var(--primary-tint) 0 1.5px, transparent 2px) 0 0 / 18px 18px,
+      var(--bg);
+  }
+
+  .stamp {
+    align-self: center;
+    padding: 3px 10px;
+    border-radius: var(--r-pill);
+    background: var(--surface);
+    color: var(--text-muted);
+    font-size: 10.5px;
+    font-weight: 600;
+    box-shadow: var(--shadow);
+  }
+
+  .bubble {
+    position: relative;
+    max-width: 88%;
+    padding: 10px 12px 20px;
+    border-radius: 4px 12px 12px 12px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+  }
+
+  .detail {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 8px;
+    padding: 8px;
+    border-radius: 6px;
+    background: var(--primary-tint);
+    font-weight: 600;
+  }
+
+  .detail span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .time {
+    position: absolute;
+    right: 10px;
+    bottom: 4px;
+    font-size: 10px;
+    color: var(--text-muted);
+  }
+</style>

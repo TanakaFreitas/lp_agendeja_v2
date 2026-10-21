@@ -1,0 +1,87 @@
+---
+// Prova social. NÃO está na página: só entra com depoimentos reais, autorizados pela barbearia
+// (BRIEFING §6 proíbe depoimento, nota ou número inventado). Para usar, importe em src/pages/index.astro
+// e passe os depoimentos reais em `itens`.
+
+interface Depoimento {
+  texto: string;
+  nome: string;
+  barbearia: string;
+  cidade?: string;
+}
+
+interface Props {
+  itens: Depoimento[];
+}
+
+const { itens } = Astro.props;
+---
+
+{
+  itens.length > 0 && (
+    <section class="section" aria-labelledby="prova-title">
+      <div class="container">
+        <div class="section-head section-head--center">
+          <span class="eyebrow">Quem usa</span>
+          <h2 id="prova-title" class="section-title">
+            O que dizem as barbearias
+          </h2>
+        </div>
+        <ul class="grid">
+          {itens.map((d) => (
+            <li class="card item">
+              <blockquote>
+                <p>“{d.texto}”</p>
+              </blockquote>
+              <p class="autor">
+                <strong>{d.nome}</strong>
+                <span>
+                  {d.barbearia}
+                  {d.cidade && ` · ${d.cidade}`}
+                </span>
+              </p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .grid {
+    list-style: none;
+    display: grid;
+    gap: var(--s-24);
+  }
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-16);
+    padding: var(--s-24);
+  }
+
+  blockquote {
+    margin: 0;
+    font-size: 1.0625rem;
+  }
+
+  .autor {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+  }
+
+  .autor strong {
+    color: var(--text);
+  }
+
+  @media (min-width: 860px) {
+    .grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

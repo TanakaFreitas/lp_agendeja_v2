@@ -1,0 +1,106 @@
+---
+import Logo from './Logo.astro';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+import { LOGIN, WHATSAPP_EXIBICAO, whatsapp } from '../data/links';
+
+const ano = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container inner">
+    <div class="brand">
+      <Logo size={44} loading="lazy" alt="" />
+      <div>
+        <p class="name">Agende Já</p>
+        <p class="tagline">Agendamento e gestão para barbearias</p>
+      </div>
+    </div>
+
+    <nav class="links" aria-label="Rodapé">
+      <a href={whatsapp()} target="_blank" rel="noopener">
+        <WhatsAppIcon size={18} />
+        WhatsApp {WHATSAPP_EXIBICAO}
+      </a>
+      <a href={LOGIN}>Entrar</a>
+      <a href="#planos">Planos</a>
+      <a href="#duvidas">Dúvidas</a>
+    </nav>
+  </div>
+  <div class="container legal">
+    <p>© Agende Já {ano}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+  }
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-24);
+    padding-block: var(--s-48) var(--s-24);
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: var(--s-12);
+  }
+
+  .name {
+    font-family: var(--font-title);
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .tagline {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-4) var(--s-8);
+    margin-inline: calc(var(--s-12) * -1);
+  }
+
+  .links a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-8);
+    min-height: 44px;
+    padding-inline: var(--s-12);
+    border-radius: var(--r-8);
+    color: var(--primary-link);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .links a:hover {
+    background: var(--primary-tint);
+  }
+
+  .legal {
+    padding-block: var(--s-16) var(--s-32);
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.875rem;
+  }
+
+  @media (min-width: 860px) {
+    .inner {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .links {
+      margin-inline: 0;
+    }
+  }
+</style>

@@ -1,0 +1,115 @@
+---
+import Icon from './Icon.astro';
+import { CADASTRO } from '../data/links';
+import { DIAS_TESTE } from '../data/planos';
+
+const passos = [
+  {
+    titulo: 'Crie a conta da barbearia',
+    texto: `Cadastre-se com e-mail e senha e crie a sua barbearia. O teste grátis de ${DIAS_TESTE} dias começa na hora, sem cartão.`,
+  },
+  {
+    titulo: 'Configure com o guia',
+    texto:
+      'O guia de primeiros passos mostra o que falta: serviço, profissional, expediente, quem faz o quê, logo e telefone. Quando tudo fica pronto, ele some.',
+  },
+  {
+    titulo: 'Divulgue o link',
+    texto:
+      'Copie o link personalizado da barbearia e mande para os clientes. Ou baixe o QR Code em PDF, imprima e deixe no balcão.',
+  },
+];
+---
+
+<section class="section section--surface" aria-labelledby="como-title">
+  <div class="container">
+    <div class="section-head section-head--center">
+      <span class="eyebrow">Como funciona</span>
+      <h2 id="como-title" class="section-title">Pronto para receber agendamentos em 3 passos</h2>
+    </div>
+
+    <ol class="steps">
+      {
+        passos.map((p, i) => (
+          <li class="step">
+            <span class="num" aria-hidden="true">
+              {i + 1}
+            </span>
+            <h3>{p.titulo}</h3>
+            <p>{p.texto}</p>
+          </li>
+        ))
+      }
+    </ol>
+
+    <div class="cta">
+      <a class="btn btn--primary btn--lg" href={CADASTRO}>
+        Criar minha barbearia
+        <Icon name="arrowRight" />
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--s-32);
+    counter-reset: passo;
+  }
+
+  .step {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-12);
+  }
+
+  .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border: 2px solid var(--secondary);
+    border-radius: var(--r-pill);
+    background: var(--gold-tint);
+    font-family: var(--font-title);
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  h3 {
+    font-size: 1.375rem;
+  }
+
+  p {
+    max-width: 34ch;
+    color: var(--text-muted);
+  }
+
+  .cta {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--s-48);
+  }
+
+  @media (min-width: 860px) {
+    .steps {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: 72px;
+      right: var(--s-16);
+      height: 2px;
+      background: repeating-linear-gradient(90deg, var(--border) 0 8px, transparent 8px 16px);
+    }
+  }
+</style>

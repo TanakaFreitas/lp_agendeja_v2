@@ -1,0 +1,107 @@
+---
+import './mockup.css';
+import Icon from '../Icon.astro';
+
+interface Props {
+  class?: string;
+}
+
+const agendados = [
+  { h: '08:40', nome: 'Bruno Lima', serv: 'Barba completa', prof: 'Diego', faltou: true },
+  { h: '09:20', nome: 'Rafael Moreira', serv: 'Corte masculino', prof: 'Diego', pago: true },
+  { h: '10:00', nome: 'Lucas Andrade', serv: 'Corte e barba', prof: 'Diego', plano: true },
+  { h: '10:40', nome: 'Pedro Santos', serv: 'Corte masculino', prof: 'Diego' },
+];
+---
+
+<div
+  class:list={['phone', Astro.props.class]}
+  role="img"
+  aria-label="Tela inicial da barbearia: guia de primeiros passos, agendados do dia filtrados por profissional e botão de encaixe rápido."
+>
+  <div class="m-screen">
+    <div class="m-appbar">
+      <Icon name="menu" />
+      <span class="m-appbar-title">Barbearia do Zé</span>
+      <span class="m-avatar">ZA</span>
+    </div>
+    <div class="m-body">
+      <div class="m-card guide">
+        <div class="m-row">
+          <Icon name="rocket" size={16} />
+          <span class="m-grow m-strong">Primeiros passos</span>
+          <span class="m-small m-muted">6 de 7</span>
+        </div>
+        <div class="m-progress"><span style="width: 86%"></span></div>
+        <span class="m-small m-muted">Próximo: divulgar o link da barbearia</span>
+      </div>
+
+      <div class="m-row" style="justify-content: space-between">
+        <span class="m-title">Agendados de hoje</span>
+        <span class="m-small m-muted">sáb, 26</span>
+      </div>
+      <div class="m-row chips">
+        <span class="m-chip">Todos</span>
+        <span class="m-chip m-chip--on">Diego</span>
+        <span class="m-chip">Marcos</span>
+        <span class="m-chip">Thiago</span>
+      </div>
+
+      <div class="m-card list">
+        {
+          agendados.map((a) => (
+            <div class="m-row item">
+              <span class="hora">{a.h}</span>
+              <span class="m-grow">
+                <span class="m-strong" style="display:block">{a.nome}</span>
+                <span class="m-small m-muted">{a.serv} · {a.prof}</span>
+              </span>
+              {a.faltou && <span class="m-chip m-chip--error">Faltou</span>}
+              {a.pago && <span class="m-chip m-chip--success">Pago</span>}
+              {a.plano && <span class="m-chip">Plano</span>}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+    <div class="m-bottom">
+      <span class="m-btn"><Icon name="zap" />Encaixe rápido</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .guide {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px;
+    border: 1px solid var(--border);
+  }
+
+  .chips {
+    gap: 6px;
+    overflow: hidden;
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .item {
+    padding: 9px 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .item:last-child {
+    border-bottom: 0;
+  }
+
+  .hora {
+    min-width: 40px;
+    font-family: var(--font-title);
+    font-size: 14px;
+    font-weight: 700;
+  }
+</style>

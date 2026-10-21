@@ -1,0 +1,212 @@
+/* Telas estilizadas do app, desenhadas em HTML/CSS com a paleta do app (não são screenshots). */
+.phone {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  border-radius: 40px;
+  background: #0b0f14;
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.08) inset,
+    0 24px 48px rgb(0 0 0 / 0.25);
+  font-family: var(--font-body);
+  user-select: none;
+}
+
+.phone::before {
+  content: '';
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  z-index: 2;
+  width: 84px;
+  height: 22px;
+  border-radius: var(--r-pill);
+  background: #0b0f14;
+  transform: translateX(-50%);
+}
+
+.m-screen {
+  display: flex;
+  flex-direction: column;
+  height: 580px;
+  overflow: hidden;
+  border-radius: 31px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.m-appbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+  height: 76px;
+  padding: 32px 14px 0;
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.m-appbar svg {
+  width: 20px;
+  height: 20px;
+  flex: none;
+}
+
+.m-appbar-title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  font-family: var(--font-title);
+  font-size: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.m-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--r-pill);
+  background: var(--secondary);
+  color: #0b191e;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.m-avatar--primary {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.m-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  min-height: 0;
+  padding: 12px;
+}
+
+.m-card {
+  background: var(--surface);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.m-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.m-grow {
+  flex: 1;
+  min-width: 0;
+}
+
+.m-strong {
+  font-weight: 600;
+}
+
+.m-title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.m-muted {
+  color: var(--text-muted);
+}
+
+.m-small {
+  font-size: 11px;
+}
+
+.m-caps {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.m-gold {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--secondary);
+}
+
+.m-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: var(--r-pill);
+  background: var(--primary-tint);
+  color: var(--text);
+  font-size: 10.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.m-chip--on {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.m-chip--success {
+  background: var(--success-tint);
+  color: var(--success-text);
+}
+
+.m-chip--error {
+  background: var(--error-tint);
+  color: var(--text);
+}
+
+.m-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 38px;
+  border-radius: 8px;
+  background: var(--primary);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.m-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.m-progress {
+  height: 6px;
+  overflow: hidden;
+  border-radius: var(--r-pill);
+  background: var(--border);
+}
+
+.m-progress > span {
+  display: block;
+  height: 100%;
+  background: var(--success);
+}
+
+.m-bottom {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px 18px;
+  background: var(--surface);
+  border-radius: 14px 14px 0 0;
+  box-shadow: 0 -1px 3px rgb(0 0 0 / 0.1);
+}

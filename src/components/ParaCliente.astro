@@ -1,0 +1,135 @@
+---
+import Icon, { type IconName } from './Icon.astro';
+import MockWhatsApp from './mockups/MockWhatsApp.astro';
+
+const itens: { icon: IconName; titulo: string; texto: string }[] = [
+  {
+    icon: 'user',
+    titulo: 'Agenda sem criar conta',
+    texto:
+      'Pelo link de acesso rápido, o cliente agenda só com nome e telefone. Quem preferir cria conta com e-mail e senha.',
+  },
+  {
+    icon: 'calendar',
+    titulo: 'Só aparece horário livre de verdade',
+    texto:
+      'Ele escolhe serviço, profissional, dia e horário. A agenda respeita expediente, almoço, folgas e a duração de cada serviço.',
+  },
+  {
+    icon: 'chat',
+    titulo: 'Confirmação e lembrete no WhatsApp',
+    texto:
+      'Ao agendar, o cliente e o profissional recebem a mensagem. O cliente recebe um lembrete antes do horário. Se cancelar, os dois são avisados.',
+  },
+  {
+    icon: 'x',
+    titulo: 'Cancela sozinho, dentro do prazo',
+    texto: 'O cliente vê os próprios agendamentos e cancela até a antecedência que você definiu.',
+  },
+  {
+    icon: 'card',
+    titulo: 'Vê o plano e o saldo',
+    texto: 'Quem tem plano acompanha créditos, vencimento e extrato, e, se você liberar, pede um plano pelo app.',
+  },
+];
+---
+
+<section class="section" aria-labelledby="cliente-title">
+  <div class="container grid">
+    <div class="visual">
+      <MockWhatsApp />
+      <p class="caption">Exemplo ilustrativo da conversa</p>
+    </div>
+
+    <div>
+      <div class="section-head">
+        <span class="eyebrow">Para o seu cliente</span>
+        <h2 id="cliente-title" class="section-title">Marcar horário fica fácil para quem senta na sua cadeira</h2>
+        <p class="lead">Seu cliente agenda pelo celular em poucos toques, a qualquer hora, sem precisar te chamar.</p>
+      </div>
+
+      <ul class="list">
+        {
+          itens.map((it) => (
+            <li>
+              <span class="icon-badge">
+                <Icon name={it.icon} />
+              </span>
+              <div>
+                <h3>{it.titulo}</h3>
+                <p>{it.texto}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    gap: var(--s-48);
+  }
+
+  .section-head {
+    margin-bottom: var(--s-32);
+  }
+
+  .visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-12);
+  }
+
+  .visual :global(.phone) {
+    max-width: 280px;
+  }
+
+  .caption {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+  }
+
+  .list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-24);
+  }
+
+  .list li {
+    display: flex;
+    gap: var(--s-16);
+    align-items: flex-start;
+  }
+
+  h3 {
+    margin-bottom: var(--s-4);
+    font-size: 1.125rem;
+  }
+
+  p {
+    color: var(--text-muted);
+  }
+
+  @media (min-width: 960px) {
+    .grid {
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      align-items: center;
+      gap: var(--s-64);
+    }
+
+    .visual {
+      order: 0;
+    }
+  }
+
+  @media (max-width: 959px) {
+    .visual {
+      order: 1;
+    }
+  }
+</style>

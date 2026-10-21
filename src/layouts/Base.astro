@@ -1,0 +1,83 @@
+---
+import '@fontsource/urbanist/latin-600.css';
+import '@fontsource/urbanist/latin-700.css';
+import '@fontsource/plus-jakarta-sans/latin-400.css';
+import '@fontsource/plus-jakarta-sans/latin-500.css';
+import '@fontsource/plus-jakarta-sans/latin-600.css';
+import '../styles/global.css';
+import urbanist700 from '@fontsource/urbanist/files/urbanist-latin-700-normal.woff2?url';
+import { SITE } from '../data/links';
+import { planos, DIAS_TESTE } from '../data/planos';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const ogImage = new URL('/og/SocialShareImage.png', SITE).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Agende Já',
+  url: SITE,
+  image: ogImage,
+  description,
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  inLanguage: 'pt-BR',
+  offers: planos.map((p) => ({
+    '@type': 'Offer',
+    name: p.nome,
+    price: p.preco.toFixed(2),
+    priceCurrency: 'BRL',
+    description: `${p.profissionais === 1 ? '1 profissional ativo' : `Até ${p.profissionais} profissionais ativos`}, agendamentos ilimitados. ${DIAS_TESTE} dias grátis.`,
+  })),
+};
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={SITE} />
+
+    <meta name="theme-color" content="#F1F4F8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0B191E" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/Icon-192.png" />
+    <link rel="apple-touch-icon" href="/icons/Icon-192.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <link rel="preload" href={urbanist700} as="font" type="font/woff2" crossorigin />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Agende Já" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={SITE} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Agende Já — agendamento online para barbearias" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    <slot />
+  </body>
+</html>

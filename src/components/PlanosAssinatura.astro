@@ -1,0 +1,157 @@
+---
+import Icon, { type IconName } from './Icon.astro';
+import MockMeuPlano from './mockups/MockMeuPlano.astro';
+
+const pontos: { icon: IconName; titulo: string; texto: string }[] = [
+  {
+    icon: 'tag',
+    titulo: 'Monte o plano do seu jeito',
+    texto:
+      'Valor, quantidade de serviços por ciclo, validade, dias da semana em que vale e quais serviços entram. Exemplo: 4 cortes por mês, de segunda a sexta.',
+  },
+  {
+    icon: 'zap',
+    titulo: 'Um toque baixa o crédito',
+    texto:
+      'No atendimento coberto pelo plano, toque em “Usar crédito do plano”. “Cliente faltou” também consome crédito. Cancelamento dentro do prazo não consome.',
+  },
+  {
+    icon: 'list',
+    titulo: 'Saldo sempre certo',
+    texto:
+      '“Adicionar crédito” para uma cortesia, baixa manual com justificativa, estorno e extrato de cada movimento.',
+  },
+  {
+    icon: 'phone',
+    titulo: 'O cliente acompanha pelo app',
+    texto:
+      'Ele vê saldo, vencimento, dias válidos, serviços cobertos e extrato. Se você ligar a opção, ele pede o plano pelo app e o pedido chega para você aguardando pagamento.',
+  },
+];
+---
+
+<section class="assinatura" aria-labelledby="assinatura-title">
+  <div class="pole-strip" aria-hidden="true"></div>
+  <div class="container grid section">
+    <div>
+      <div class="section-head">
+        <span class="eyebrow">Planos de assinatura para os seus clientes</span>
+        <h2 id="assinatura-title" class="section-title">
+          Fidelize com plano mensal e controle os créditos sem planilha
+        </h2>
+        <p class="lead">
+          Chega de controlar de cabeça quem tem plano e quantos cortes ainda restam. O cliente paga a mensalidade na
+          barbearia, você registra, e o Agende Já faz a conta.
+        </p>
+      </div>
+
+      <ul class="pontos">
+        {
+          pontos.map((p) => (
+            <li class="card ponto">
+              <span class="icon-badge">
+                <Icon name={p.icon} />
+              </span>
+              <h3>{p.titulo}</h3>
+              <p>{p.texto}</p>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="obs">
+        <Icon name="wallet" size={20} />
+        <span>
+          O pagamento da mensalidade é feito na barbearia, e o app registra. A validade do plano conta a partir do pagamento.
+        </span>
+      </p>
+    </div>
+
+    <div class="visual">
+      <MockMeuPlano />
+    </div>
+  </div>
+</section>
+
+<style>
+  .assinatura {
+    background: linear-gradient(180deg, var(--gold-tint), transparent 70%), var(--bg);
+  }
+
+  .pole-strip {
+    height: 4px;
+  }
+
+  .grid {
+    display: grid;
+    gap: var(--s-48);
+  }
+
+  .section-head {
+    margin-bottom: var(--s-32);
+  }
+
+  .pontos {
+    list-style: none;
+    display: grid;
+    gap: var(--s-16);
+  }
+
+  .ponto {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-8);
+    padding: var(--s-24);
+  }
+
+  .ponto .icon-badge {
+    margin-bottom: var(--s-4);
+  }
+
+  h3 {
+    font-size: 1.125rem;
+  }
+
+  .ponto p {
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+  }
+
+  .obs {
+    display: flex;
+    gap: var(--s-12);
+    align-items: flex-start;
+    margin-top: var(--s-24);
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+  }
+
+  .obs :global(svg) {
+    flex: none;
+    margin-top: 2px;
+    color: var(--text);
+  }
+
+  .visual {
+    display: flex;
+    justify-content: center;
+  }
+
+  .visual :global(.phone) {
+    max-width: 280px;
+  }
+
+  @media (min-width: 640px) {
+    .pontos {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .grid {
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.8fr);
+      align-items: center;
+      gap: var(--s-64);
+    }
+  }
+</style>

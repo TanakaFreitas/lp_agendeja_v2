@@ -1,0 +1,159 @@
+---
+import './mockup.css';
+import Icon from '../Icon.astro';
+
+interface Props {
+  class?: string;
+}
+
+const dias = [
+  { d: 'SEG', n: 21 },
+  { d: 'TER', n: 22 },
+  { d: 'QUA', n: 23 },
+  { d: 'QUI', n: 24 },
+  { d: 'SEX', n: 25 },
+  { d: 'SÁB', n: 26, on: true },
+];
+const manha = [
+  { h: '08:00', livre: false },
+  { h: '08:40', livre: false },
+  { h: '09:20', livre: true },
+  { h: '10:00', livre: true, on: true },
+  { h: '10:40', livre: true },
+  { h: '11:20', livre: true },
+  { h: '12:00', livre: false },
+  { h: '12:40', livre: true },
+];
+const tarde = [
+  { h: '14:00', livre: true },
+  { h: '14:40', livre: true },
+  { h: '15:20', livre: false },
+  { h: '16:00', livre: true },
+];
+---
+
+<div
+  class:list={['phone', Astro.props.class]}
+  role="img"
+  aria-label="Tela do cliente escolhendo o horário: corte masculino com Diego, no sábado, com só os horários livres disponíveis."
+>
+  <div class="m-screen">
+    <div class="m-appbar">
+      <Icon name="chevronRight" class="flip" />
+      <span class="m-appbar-title">Horários</span>
+    </div>
+    <div class="m-body">
+      <div class="m-card m-row" style="padding: 10px">
+        <span class="m-avatar m-avatar--primary">DS</span>
+        <span class="m-grow">
+          <span class="m-title" style="display:block">Corte masculino com Diego</span>
+          <span class="m-small m-muted">40 min · R$ 45</span>
+        </span>
+      </div>
+      <div class="m-row" style="justify-content: space-between">
+        <span class="m-title">Setembro</span>
+        <span class="m-small m-muted">7 horários livres</span>
+      </div>
+      <div class="week">
+        {
+          dias.map((x) => (
+            <span class:list={['day', { on: x.on }]}>
+              <span class="dd">{x.d}</span>
+              <span class="dn">{x.n}</span>
+            </span>
+          ))
+        }
+      </div>
+      <span class="m-caps">Sábado, 26 · manhã</span>
+      <div class="slots">
+        {manha.map((s) => <span class:list={['slot', { busy: !s.livre, on: s.on }]}>{s.h}</span>)}
+      </div>
+      <span class="m-caps">Tarde</span>
+      <div class="slots">
+        {tarde.map((s) => <span class:list={['slot', { busy: !s.livre }]}>{s.h}</span>)}
+      </div>
+    </div>
+    <div class="m-bottom">
+      <div class="m-row" style="justify-content: space-between">
+        <span class="m-small m-muted">Sáb 26/09 às 10:00 · Diego</span>
+        <span class="m-gold">R$ 45</span>
+      </div>
+      <span class="m-btn">Confirmar agendamento</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .flip {
+    transform: scaleX(-1);
+  }
+
+  .week {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 5px;
+  }
+
+  .day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 6px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+  }
+
+  .dd {
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+
+  .dn {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .day.on {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: #ffffff;
+  }
+
+  .day.on .dd {
+    color: #ffffff;
+  }
+
+  .slots {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 34px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .slot.busy {
+    border-color: transparent;
+    background: var(--busy);
+    color: var(--text-muted);
+    font-weight: 500;
+    text-decoration: line-through;
+  }
+
+  .slot.on {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: #ffffff;
+  }
+</style>

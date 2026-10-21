@@ -1,0 +1,185 @@
+---
+import Icon, { type IconName } from './Icon.astro';
+
+// Funcionalidades que existem hoje (BRIEFING §4). Rótulos do app entre aspas.
+const grupos: { icon: IconName; titulo: string; itens: string[]; nota?: string }[] = [
+  {
+    icon: 'calendar',
+    titulo: 'Agenda',
+    itens: [
+      'Agendados do dia com filtro por profissional e por dia',
+      '“Agendamentos do mês” com busca por cliente',
+      'Painel de ocupação: no Dia, a equipe inteira lado a lado; na Semana, um profissional hora a hora',
+      'Encaixe rápido na tela inicial, sem cadastrar cliente',
+      'Agendamento manual para quem marca por telefone ou no balcão',
+      '“Receber pagamento”, “Usar crédito do plano”, “Cliente faltou” e “Conversar no WhatsApp” direto no agendamento',
+    ],
+  },
+  {
+    icon: 'scissors',
+    titulo: 'Serviços',
+    itens: [
+      'Nome, valor, duração, ícone, destaque e ordem',
+      'A duração define o tamanho do horário na agenda',
+      'Preço promocional por dia da semana, como o corte mais barato na terça',
+    ],
+  },
+  {
+    icon: 'users',
+    titulo: 'Profissionais',
+    itens: [
+      'Expediente por dia com intervalo de almoço e “Copiar para os outros dias”',
+      '“Serviços que atende” para cada profissional',
+      'Recesso para férias, feriado ou folga, e dia especial com horário diferente',
+    ],
+  },
+  {
+    icon: 'user',
+    titulo: 'Clientes',
+    itens: [
+      'Uma lista só: com conta, sem login e avulso',
+      'Busca por nome ou telefone, filtros “Com plano” e “Bloqueados”',
+      'WhatsApp direto, “Colocar num plano” e bloqueio de acesso',
+    ],
+  },
+  {
+    icon: 'wallet',
+    titulo: 'Recebimentos',
+    itens: [
+      'Registre o pagamento no atendimento, por forma de pagamento, com valor ajustável',
+      'Total do mês e total por forma de pagamento',
+      'Lançou errado? “Estornar lançamento”, com motivo. O estornado fica visível em “Estornados”',
+    ],
+    nota: 'É registro do que você recebeu. O pagamento é feito na barbearia, como sempre.',
+  },
+  {
+    icon: 'bag',
+    titulo: 'Vitrine de produtos',
+    itens: [
+      'Mostre pomadas, óleos e o que mais vender na barbearia',
+      'O cliente toca em “Pedir pelo WhatsApp” e a venda acontece no balcão',
+    ],
+  },
+  {
+    icon: 'qr',
+    titulo: 'Divulgação',
+    itens: [
+      'Link personalizado da barbearia em duas versões: “Cadastro com senha” e “Acesso rápido”',
+      'Botão “Copiar” e “QR Code (PDF)” para imprimir e deixar no balcão',
+    ],
+  },
+  {
+    icon: 'sliders',
+    titulo: 'Configuração e apoio',
+    itens: [
+      'Guia de primeiros passos com 7 passos na tela inicial',
+      '“Aceitar cliente sem login”, “Permitir cancelar até” e “Período máximo para agendar”',
+      'Mensagem para o cliente na tela inicial',
+      'Central de ajuda com passo a passo de cada tela e “Falar com o suporte”',
+      'Tema claro, escuro ou do sistema',
+    ],
+  },
+];
+---
+
+<section class="section section--surface" id="funcionalidades" aria-labelledby="func-title">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Para a sua barbearia</span>
+      <h2 id="func-title" class="section-title">Tudo o que a barbearia precisa para tocar o dia</h2>
+      <p class="lead">
+        Funciona no navegador do celular ou do computador e instala na tela inicial como app. Cada barbearia vê só os
+        próprios dados.
+      </p>
+    </div>
+
+    <div class="grid">
+      {
+        grupos.map((g) => (
+          <article class="group">
+            <header>
+              <span class="icon-badge">
+                <Icon name={g.icon} />
+              </span>
+              <h3>{g.titulo}</h3>
+            </header>
+            <ul class="check-list">
+              {g.itens.map((item) => (
+                <li>
+                  <Icon name="check" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            {g.nota && <p class="nota">{g.nota}</p>}
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    gap: var(--s-16);
+  }
+
+  .group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-16);
+    padding: var(--s-24);
+    border: 1px solid var(--border);
+    border-radius: var(--r-16);
+    background: var(--bg);
+  }
+
+  .group header {
+    display: flex;
+    align-items: center;
+    gap: var(--s-12);
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  .check-list {
+    font-size: 0.9375rem;
+    gap: var(--s-8);
+  }
+
+  .check-list li > :global(svg) {
+    width: 18px;
+    height: 18px;
+    margin-top: 3px;
+  }
+
+  .nota {
+    margin-top: auto;
+    padding: var(--s-12);
+    border-radius: var(--r-8);
+    background: var(--warning-tint);
+    border: 1px solid var(--warning-border);
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  @media (min-width: 720px) {
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--s-24);
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .group:first-child {
+      grid-row: span 2;
+    }
+  }
+</style>
