@@ -19,6 +19,7 @@ export const planos: Plano[] = [
     preco: 67,
     profissionais: 1,
     resumo: 'Para quem atende sozinho.',
+    destaque: true,
   },
   {
     id: 'profissional',
@@ -26,7 +27,6 @@ export const planos: Plano[] = [
     preco: 97,
     profissionais: 3,
     resumo: 'Para uma equipe pequena.',
-    destaque: true,
   },
   {
     id: 'barber-pro',
