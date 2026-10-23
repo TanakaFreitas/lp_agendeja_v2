@@ -1,7 +1,7 @@
 # Briefing — landing page do Agende Já
 
 Você vai construir, neste repositório, a landing page do **Agende Já** em
-**Astro**, publicada em **https://lp.agendeja.app.br/**. Este documento é o
+**Astro**, publicada em **https://agendeja.app.br/**. Este documento é o
 contrato: fatos do produto, links, preços, identidade visual e o que **não**
 pode ser prometido. Foi levantado em 20/10/2026 direto do código e do banco do
 app (repositório `C:\projetosApp\agende_flutter`).
@@ -318,7 +318,7 @@ Tiradas da Ajuda do app. Pode reescrever o estilo, sem mudar o fato.
 - **Astro**, saída **estática** (`output: 'static'`). Tailwind é opcional
   (se usar, mapeie a paleta da §8 no tema). **Zero JS por padrão**; ilha só se
   for indispensável (menu mobile pode ser `<details>` ou CSS).
-- **Deploy:** Cloudflare Pages, domínio `lp.agendeja.app.br`. A zona
+- **Deploy:** Cloudflare Pages, domínio `agendeja.app.br`. A zona
   `agendeja.app.br` já está na Cloudflare. Comando de build `npm run build`,
   saída `dist/`. Não mexa em nada de `barbearia.agendeja.app.br`.
 - **SEO:**
@@ -326,7 +326,7 @@ Tiradas da Ajuda do app. Pode reescrever o estilo, sem mudar o fato.
   - `<title>` com "Agende Já" (ex.: "Agende Já — agendamento online para
     barbearias");
   - `meta description`;
-  - canonical `https://lp.agendeja.app.br/`;
+  - canonical `https://agendeja.app.br/`;
   - Open Graph e Twitter Card (`summary_large_image`) com o
     `SocialShareImage.png` em URL absoluta;
   - `@astrojs/sitemap`, `robots.txt`;

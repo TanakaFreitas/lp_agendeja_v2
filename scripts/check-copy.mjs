@@ -63,7 +63,7 @@ for (const arquivo of arquivos) {
   }
 
   for (const [, href] of html.matchAll(/href="([^"]+)"/g)) {
-    if (/^https?:\/\/[^/]*agendeja\.app\.br/.test(href) && !href.startsWith('https://lp.agendeja.app.br')) {
+    if (/^https?:\/\/[^/]*agendeja\.app\.br/.test(href) && !href.startsWith('https://agendeja.app.br')) {
       if (!APP_PERMITIDAS.has(href)) erros.push(`${arquivo}: link do app fora do contrato: ${href}`);
     }
     if (href.startsWith('https://wa.me/') && !href.startsWith('https://wa.me/5531936181560?text=')) {
