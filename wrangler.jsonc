@@ -1,0 +1,10 @@
+{
+  "name": "lp-agendeja-v2",
+  "compatibility_date": "2026-10-23",
+  // Site estático: o Worker só serve o que o `astro build` gera em dist/.
+  "assets": {
+    "directory": "./dist"
+  },
+  // Exigido pelo `wrangler preview` (prévias dos PRs no Workers Builds).
+  "previews": {}
+}
