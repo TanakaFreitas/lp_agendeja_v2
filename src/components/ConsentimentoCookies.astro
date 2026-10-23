@@ -1,0 +1,191 @@
+---
+/**
+ * Aviso de consentimento do Meta Pixel (LGPD, BRIEFING §12). Nada carrega antes do
+ * "Aceitar", e "Recusar" tem o mesmo tamanho e o mesmo lugar: recusa que dá mais
+ * trabalho que aceitar não é escolha livre. "Preferências de cookies", no rodapé,
+ * reabre o aviso, e recusar depois de aceitar apaga os cookies do Pixel e recarrega
+ * a página. Sem META_PIXEL_ID em src/data/analytics.ts, nada disto é renderizado.
+ *
+ * Eventos: `Lead` no toque em qualquer link para o cadastro (é o que a campanha
+ * otimiza) e `Contact` no toque em qualquer link do WhatsApp.
+ */
+import { META_PIXEL_ID } from '../data/analytics';
+---
+
+{
+  META_PIXEL_ID && (
+    <div id="consentimento-cookies" data-pixel-id={META_PIXEL_ID} role="region" aria-label="Aviso de cookies" hidden>
+      <div class="container inner">
+        <p>
+          Com a sua permissão, usamos o Meta Pixel para medir os nossos anúncios no Facebook e no Instagram. Ele
+          grava um cookie no seu navegador. Veja a <a href="/privacidade/">privacidade do site</a>.
+        </p>
+        <div class="acoes">
+          <button type="button" class="btn btn--outline" data-consentimento="recusar">Recusar</button>
+          <button type="button" class="btn btn--primary" data-consentimento="aceitar">Aceitar</button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+<script>
+  import { CADASTRO } from '../data/links';
+
+  const CHAVE = 'consentimento-anuncios';
+  const banner = document.querySelector<HTMLElement>('#consentimento-cookies');
+  const pixelId = banner?.dataset.pixelId;
+
+  type Fbq = ((...args: unknown[]) => void) & {
+    callMethod?: (...args: unknown[]) => void;
+    queue: unknown[];
+    push: Fbq;
+    loaded: boolean;
+    version: string;
+  };
+  const w = window as unknown as { fbq?: Fbq; _fbq?: Fbq };
+
+  // O navegador pode recusar o armazenamento (modo privado, dados bloqueados).
+  const ler = () => {
+    try {
+      return localStorage.getItem(CHAVE);
+    } catch {
+      return null;
+    }
+  };
+  const gravar = (valor: string) => {
+    try {
+      localStorage.setItem(CHAVE, valor);
+    } catch {
+      /* vale só para esta página */
+    }
+  };
+
+  // Bootstrap oficial do Meta Pixel, sem <script> inline.
+  const ativarPixel = (id: string) => {
+    if (!w.fbq) {
+      const n = function (...args: unknown[]) {
+        if (n.callMethod) n.callMethod(...args);
+        else n.queue.push(args);
+      } as Fbq;
+      n.push = n;
+      n.loaded = true;
+      n.version = '2.0';
+      n.queue = [];
+      w.fbq = n;
+      w._fbq = w._fbq || n;
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://connect.facebook.net/en_US/fbevents.js';
+      document.head.append(s);
+    }
+    w.fbq('init', id);
+    w.fbq('track', 'PageView');
+  };
+
+  // Os cookies podem ficar no domínio de cima (.agendeja.app.br): tenta cada nível.
+  const apagarCookies = () => {
+    const partes = location.hostname.split('.');
+    const dominios = [''];
+    for (let i = 0; i < partes.length - 1; i++) {
+      dominios.push(`; domain=.${partes.slice(i).join('.')}`);
+    }
+    for (const nome of ['_fbp', '_fbc']) {
+      for (const dominio of dominios) {
+        document.cookie = `${nome}=; Max-Age=0; path=/${dominio}`;
+      }
+    }
+  };
+
+  const mostrar = () => {
+    if (!banner) return;
+    banner.hidden = false;
+    banner.querySelector<HTMLButtonElement>('[data-consentimento]')?.focus();
+  };
+
+  if (banner && pixelId) {
+    const escolha = ler();
+    if (escolha === 'aceito') ativarPixel(pixelId);
+    else if (escolha !== 'recusado') banner.hidden = false;
+
+    banner.addEventListener('click', (evento) => {
+      const alvo = (evento.target as HTMLElement).closest<HTMLElement>('[data-consentimento]');
+      if (!alvo) return;
+      const aceitou = alvo.dataset.consentimento === 'aceitar';
+      const antes = ler();
+      gravar(aceitou ? 'aceito' : 'recusado');
+      banner.hidden = true;
+
+      if (aceitou) {
+        if (antes !== 'aceito') ativarPixel(pixelId);
+      } else if (antes === 'aceito' || w.fbq) {
+        // Revogação: o Pixel já rodou nesta página e não dá para descarregá-lo.
+        w.fbq?.('consent', 'revoke');
+        apagarCookies();
+        location.reload();
+      }
+    });
+
+    // Sem "Aceitar", fbq não existe e nada sai.
+    document.addEventListener('click', (evento) => {
+      const alvo = evento.target as HTMLElement;
+      if (alvo.closest('[data-abrir-consentimento]')) mostrar();
+      else if (alvo.closest(`a[href^="${CADASTRO}"]`)) w.fbq?.('track', 'Lead');
+      else if (alvo.closest('a[href^="https://wa.me/"]')) w.fbq?.('track', 'Contact');
+    });
+  }
+</script>
+
+<style>
+  #consentimento-cookies {
+    position: fixed;
+    inset: auto 0 0;
+    z-index: 50;
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    box-shadow: var(--shadow-lg);
+  }
+
+  #consentimento-cookies[hidden] {
+    display: none;
+  }
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-16);
+    padding-block: var(--s-16);
+  }
+
+  p {
+    font-size: 0.9375rem;
+  }
+
+  p a {
+    color: var(--primary-link);
+    font-weight: 600;
+    text-underline-offset: 3px;
+  }
+
+  .acoes {
+    display: flex;
+    gap: var(--s-12);
+  }
+
+  .acoes .btn {
+    flex: 1;
+  }
+
+  @media (min-width: 720px) {
+    .inner {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--s-32);
+    }
+
+    .acoes .btn {
+      flex: none;
+    }
+  }
+</style>

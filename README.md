@@ -1,6 +1,6 @@
 # Landing page do Agende Já
 
-Site estático em Astro publicado em **https://lp.agendeja.app.br/**. O contrato de conteúdo
+Site estático em Astro publicado em **https://agendeja.app.br/**. O contrato de conteúdo
 (o que pode e o que não pode ser prometido, links, preços, paleta) está em [BRIEFING.md](BRIEFING.md).
 
 ## Comandos
@@ -19,6 +19,7 @@ Site estático em Astro publicado em **https://lp.agendeja.app.br/**. O contrato
 - **Preços, limites de profissionais e dias de teste:** `src/data/planos.ts`. Cards, textos e JSON-LD leem daqui.
 - **URLs do app e do WhatsApp:** `src/data/links.ts`. Não acrescente rotas do app que não existam.
 - **Perguntas frequentes:** `src/data/faq.ts`.
+- **Meta Pixel:** o id em `src/data/analytics.ts`. Com id, entram o aviso de cookies (`src/components/ConsentimentoCookies.astro`) e a seção do Pixel em `/privacidade/`; sem id, nenhum dos dois.
 - **Blog:** um `.md` por artigo em `src/content/blog/` (frontmatter `title`, `description`, `pubDate`; o nome do arquivo vira `/blog/<nome>/`). O texto segue as mesmas regras do briefing (§6 e §9), e o `check:copy` confere os artigos também.
 - **Cores, espaçamento e raios:** tokens em `src/styles/global.css` (claro em `:root`, escuro redefinido logo abaixo).
 - **Telas do app:** são mockups em HTML/CSS em `src/components/mockups/`, não screenshots.
@@ -33,9 +34,9 @@ Site estático em Astro publicado em **https://lp.agendeja.app.br/**. O contrato
    - Build command: `npm run build`
    - Build output directory: `dist`
    - Variável de ambiente: `NODE_VERSION` = `22`
-4. Depois do primeiro deploy: **Custom domains → Set up a custom domain** → `lp.agendeja.app.br`. Como a zona
+4. Depois do primeiro deploy: **Custom domains → Set up a custom domain** → `agendeja.app.br`. Como a zona
    `agendeja.app.br` já está na Cloudflare, o CNAME é criado sozinho. Não mexa em `barbearia.agendeja.app.br`.
 5. Opcional: ative o **Web Analytics** do projeto no painel (não usa cookie, não precisa de banner).
 
 Depois de publicar, teste o preview de compartilhamento com um validador de Open Graph
-(por exemplo, https://www.opengraph.xyz/) usando `https://lp.agendeja.app.br/`.
+(por exemplo, https://www.opengraph.xyz/) usando `https://agendeja.app.br/`.

@@ -6,6 +6,7 @@ import '@fontsource/plus-jakarta-sans/latin-500.css';
 import '@fontsource/plus-jakarta-sans/latin-600.css';
 import '../styles/global.css';
 import urbanist700 from '@fontsource/urbanist/files/urbanist-latin-700-normal.woff2?url';
+import ConsentimentoCookies from '../components/ConsentimentoCookies.astro';
 import { SITE } from '../data/links';
 import { planos, DIAS_TESTE } from '../data/planos';
 
@@ -84,5 +85,6 @@ const jsonLd = Astro.props.jsonLd ?? {
   <body>
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
     <slot />
+    <ConsentimentoCookies />
   </body>
 </html>

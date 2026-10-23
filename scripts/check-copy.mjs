@@ -56,14 +56,16 @@ for (const arquivo of arquivos) {
     .replace(/<[^>]+>/g, ' ');
   const alvo = normalizar(`${texto} ${atributos.join(' ')}`);
 
-  // Busca por trecho: "relatorio" também pega "relatorios".
+  // Busca por trecho: "relatorio" também pega "relatorios". Só "pix" é palavra
+  // inteira, para o "Meta Pixel" do aviso de cookies não contar.
   const compacto = alvo.replace(/\s+/g, ' ');
   for (const termo of PROIBIDAS) {
-    if (compacto.includes(termo)) erros.push(`${arquivo}: termo proibido "${termo}"`);
+    const achou = termo === 'pix' ? /\bpix\b/.test(compacto) : compacto.includes(termo);
+    if (achou) erros.push(`${arquivo}: termo proibido "${termo}"`);
   }
 
   for (const [, href] of html.matchAll(/href="([^"]+)"/g)) {
-    if (/^https?:\/\/[^/]*agendeja\.app\.br/.test(href) && !href.startsWith('https://lp.agendeja.app.br')) {
+    if (/^https?:\/\/[^/]*agendeja\.app\.br/.test(href) && !href.startsWith('https://agendeja.app.br')) {
       if (!APP_PERMITIDAS.has(href)) erros.push(`${arquivo}: link do app fora do contrato: ${href}`);
     }
     if (href.startsWith('https://wa.me/') && !href.startsWith('https://wa.me/5531936181560?text=')) {

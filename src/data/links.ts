@@ -17,4 +17,4 @@ export function whatsapp(texto: string = WHATSAPP_TEXTO_PADRAO): string {
   return `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(texto)}`;
 }
 
-export const SITE = 'https://lp.agendeja.app.br/';
+export const SITE = 'https://agendeja.app.br/';

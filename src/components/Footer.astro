@@ -2,6 +2,7 @@
 import Logo from './Logo.astro';
 import WhatsAppIcon from './WhatsAppIcon.astro';
 import { LOGIN, WHATSAPP_EXIBICAO, whatsapp } from '../data/links';
+import { META_PIXEL_ID } from '../data/analytics';
 
 const ano = new Date().getFullYear();
 ---
@@ -29,6 +30,15 @@ const ano = new Date().getFullYear();
   </div>
   <div class="container legal">
     <p>© Agende Já {ano}</p>
+    <a href="/privacidade/">Privacidade do site</a>
+    {
+      META_PIXEL_ID && (
+        /* Reabre o aviso de cookies (ConsentimentoCookies.astro). */
+        <button type="button" data-abrir-consentimento>
+          Preferências de cookies
+        </button>
+      )
+    }
   </div>
 </footer>
 
@@ -87,10 +97,29 @@ const ano = new Date().getFullYear();
   }
 
   .legal {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-4) var(--s-24);
     padding-block: var(--s-16) var(--s-32);
     border-top: 1px solid var(--border);
     color: var(--text-muted);
     font-size: 0.875rem;
+  }
+
+  .legal a,
+  .legal button {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--primary-link);
+    font: inherit;
+    font-weight: 600;
+    text-underline-offset: 3px;
+    cursor: pointer;
   }
 
   @media (min-width: 860px) {
