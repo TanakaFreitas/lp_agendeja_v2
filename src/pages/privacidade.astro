@@ -1,0 +1,152 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { APP, SITE, WHATSAPP_EXIBICAO, whatsapp } from '../data/links';
+import { META_PIXEL_ID } from '../data/analytics';
+
+// Aviso do SITE, e só dele. O Meta Pixel é descrito aqui só quando está ligado em
+// src/data/analytics.ts: um aviso que anuncia uma coleta que não acontece erra tanto
+// quanto um que esconde uma que acontece.
+const anuncia = META_PIXEL_ID !== null;
+
+const title = 'Privacidade do site — Agende Já';
+const description = 'O que o site agendeja.app.br coleta, para quê, por quanto tempo e como pedir acesso ou exclusão.';
+const canonical = new URL('privacidade/', SITE).href;
+const contato = whatsapp('Olá! Tenho uma dúvida sobre a privacidade do site do Agende Já.');
+---
+
+<Base title={title} description={description} canonical={canonical}>
+  <Header />
+  <main id="conteudo">
+    <article class="section" aria-labelledby="privacidade-title">
+      <div class="container coluna">
+        <header class="cabeca">
+          <h1 id="privacidade-title">Privacidade do site</h1>
+          <p class="meta">Última atualização: 23 de outubro de 2026</p>
+        </header>
+
+        <div class="prose">
+          <p>
+            Este aviso cobre <strong>apenas este site</strong>, {SITE.replace('https://', '').replace(/\/$/, '')}. O
+            que você informa ao criar a conta e ao usar o Agende Já fica no app, em {APP.replace('https://', '')}, e
+            não passa por aqui.
+          </p>
+
+          <h2>1. Quem responde pelos dados</h2>
+          <p>
+            O Agende Já, operado pela Mafre Soluções. Para qualquer assunto deste aviso, fale pelo WhatsApp{' '}
+            <a href={contato} target="_blank" rel="noopener">{WHATSAPP_EXIBICAO}</a>.
+          </p>
+
+          <h2>2. O que este site coleta</h2>
+          <p>Este site não tem formulário e não pede login.</p>
+          {
+            anuncia ? (
+              <p>
+                <strong>O Meta Pixel, só se você permitir.</strong> Ele mede os nossos anúncios no Facebook e no
+                Instagram: registra que você abriu uma página deste site e se tocou em “Testar grátis” ou em “Falar
+                no WhatsApp”. Para isso grava um cookie (<code>_fbp</code>) no seu navegador e manda à Meta o
+                endereço da página, o seu IP e dados do navegador. Nada disso carrega antes de você tocar em
+                “Aceitar” no aviso de cookies. A sua escolha fica guardada no próprio navegador, sem cookie.
+              </p>
+            ) : (
+              <p>
+                Este site <strong>não</strong> usa cookie de rastreamento nem pixel de anúncio. Por isso também não
+                tem aviso de cookies: não há a que consentir.
+              </p>
+            )
+          }
+          <p>
+            Como em qualquer site, a Cloudflare, que hospeda estas páginas, recebe dados técnicos de cada acesso,
+            como o IP e o navegador, para entregar a página e protegê-la de abuso.
+          </p>
+
+          <h2>3. Para que os dados são usados</h2>
+          {
+            anuncia && (
+              <p>
+                O Meta Pixel serve para saber se os anúncios trazem donos de barbearia interessados no Agende Já e
+                para a Meta mostrá-los a pessoas parecidas. A base legal é o seu consentimento, que você dá ou recusa
+                no aviso de cookies e pode retirar quando quiser em “Preferências de cookies”, no rodapé.
+              </p>
+            )
+          }
+          <p>Os dados não são vendidos e não alimentam lista de terceiros.</p>
+
+          <h2>4. Por quanto tempo ficam</h2>
+          {
+            anuncia ? (
+              <p>
+                O cookie <code>_fbp</code> vale por até 90 dias e é apagado quando você recusa depois de ter aceitado.
+                O que a Meta recebe segue a <a href="https://www.facebook.com/privacy/policy/">Política de
+                Privacidade da Meta</a>.
+              </p>
+            ) : (
+              <p>Este site não guarda dados de quem o visita.</p>
+            )
+          }
+
+          <h2>5. Seus direitos</h2>
+          <p>
+            Pela LGPD, você pode pedir a confirmação de que tratamos dados seus, o acesso a eles, a correção, a
+            exclusão e a revogação do consentimento. Peça pelo WhatsApp{' '}
+            <a href={contato} target="_blank" rel="noopener">{WHATSAPP_EXIBICAO}</a>.
+          </p>
+
+          <h2>6. Mudanças neste aviso</h2>
+          <p>Quando este aviso mudar, a data no topo muda junto.</p>
+        </div>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .coluna {
+    max-width: calc(68ch + 2 * var(--s-32));
+  }
+
+  .cabeca {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-12);
+    padding-bottom: var(--s-32);
+    margin-bottom: var(--s-32);
+    border-bottom: 1px solid var(--border);
+  }
+
+  h1 {
+    font-size: clamp(1.875rem, 1.3rem + 2.4vw, 2.75rem);
+  }
+
+  .meta {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+  }
+
+  .prose {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+  }
+
+  .prose > * + * {
+    margin-top: var(--s-16);
+  }
+
+  .prose h2 {
+    margin-top: var(--s-48);
+    font-size: clamp(1.375rem, 1.1rem + 1vw, 1.75rem);
+  }
+
+  .prose h2 + * {
+    margin-top: var(--s-12);
+  }
+
+  .prose a {
+    color: var(--primary-link);
+    font-weight: 600;
+    text-underline-offset: 3px;
+  }
+</style>

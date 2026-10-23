@@ -340,7 +340,11 @@ Tiradas da Ajuda do app. Pode reescrever o estilo, sem mudar o fato.
   `preload` só do peso do hero.
 - **Acessibilidade:** AA, foco visível, `alt` em toda imagem, hierarquia de
   títulos correta, alvos de toque ≥ 44 px.
-- **Privacidade:** sem cookies de terceiros e sem banner de cookies. Se houver
+- **Privacidade:** o único cookie de terceiros é o do Meta Pixel, e só depois
+  do "Aceitar" no aviso de cookies (decidido pelo usuário em 23/10/2026, para
+  os anúncios na Meta). Ele dispara `Lead` no clique para o cadastro e
+  `Contact` no WhatsApp. O id fica em `src/data/analytics.ts`; sem id, não há
+  Pixel nem aviso. `/privacidade/` descreve o que está ligado. Se houver mais
   analytics, Cloudflare Web Analytics (sem cookie).
 - Links externos para o app abrem na mesma aba; WhatsApp em nova aba com
   `rel="noopener"`.
