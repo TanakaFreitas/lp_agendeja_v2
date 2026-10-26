@@ -4,7 +4,8 @@ Você vai construir, neste repositório, a landing page do **Agende Já** em
 **Astro**, publicada em **https://agendeja.app.br/**. Este documento é o
 contrato: fatos do produto, links, preços, identidade visual e o que **não**
 pode ser prometido. Foi levantado em 20/10/2026 direto do código e do banco do
-app (repositório `C:\projetosApp\agende_flutter`).
+app (repositório `C:\projetosApp\agende_flutter`). Atualizado em 26/10/2026 com o
+fechamento semanal e mensal por WhatsApp (§4), que roda no n8n e não está no repositório do app.
 
 Regra de ouro: **a página só promete o que o app faz hoje.** Na dúvida sobre
 uma funcionalidade, pergunte ao usuário antes de escrever.
@@ -25,7 +26,8 @@ uma funcionalidade, pergunte ao usuário antes de escrever.
 **Agende Já** é um sistema de agendamento e gestão para barbearias. O cliente
 agenda pelo link da barbearia (com conta ou só com nome e telefone) e recebe a
 mensagem no WhatsApp. A barbearia controla agenda, profissionais, clientes,
-planos de assinatura e o que recebeu.
+planos de assinatura e o que recebeu. Todo domingo e todo dia 1º, o dono recebe no WhatsApp
+o fechamento da semana ou do mês, com uma análise escrita por IA (§4).
 
 - Funciona **no navegador** do celular ou do computador, e **instala na tela
   inicial** como app (PWA: iPhone pelo Safari, Android pelo Chrome, computador
@@ -86,6 +88,33 @@ Use estas, com estas palavras. Entre aspas, os rótulos reais dos botões no app
   continua visível em "Estornados".
 - ⚠ É **registro**, não cobrança. O app não cobra ninguém.
 
+**Fechamento semanal e mensal no WhatsApp** (diferencial; vale um bloco próprio na
+página). Lido em 26/10/2026 nos fluxos do n8n "Relatório Semanal Automático V2" e
+"Relatório Mensal Automático v2", ambos ativos.
+- **Semanal:** todo **domingo, por volta das 9h**, com a semana de domingo a sábado que
+  acabou. **Mensal:** no **dia 1º, por volta das 9h**, com o mês anterior inteiro.
+- Chegam **duas mensagens, uma logo depois da outra**, no WhatsApp do telefone cadastrado em
+  "Dados da barbearia":
+  1. **O relatório do sistema**, com os números: faturamento previsto, total recebido, pendências
+     (com o detalhe de quem deve), perdas por cancelamento, ticket médio, formas de pagamento,
+     resumo operacional (agendamentos, serviços realizados, cancelamentos, horários vagos
+     efetivos, taxa de cancelamento, tempo produzido), dias da semana, clientes únicos, top
+     clientes, clientes com cancelamentos e ranking de serviços.
+  2. **A análise por IA**, que lê esse relatório e não repete os números: diz o que eles
+     significam e fecha com uma ação para a semana ou uma meta para o mês.
+- **Só chega se houve agendamento no período.** Barbearia sem movimento não recebe nada.
+- O dono **não liga nem configura nada**, e o horário e o conteúdo não são ajustáveis.
+- ⚠ **Confirme antes de dizer "todas as barbearias recebem".** O fluxo só envia a quem tem
+  `empresa.is_relatorio` ligado, e o app não tem tela para isso (`docs/08-divida-tecnica.md`, B8).
+  O usuário informou em 26/10/2026 que a marca já vem ligada, mas na execução de 25/10 o fluxo
+  enviou a 2 barbearias. Peça a confirmação antes de afirmar na página.
+- Na página, diga **"fechamento semanal e mensal"** e use "relatório" só para a primeira
+  mensagem. A análise é "escrita por IA" e deve ser apresentada como **segunda opinião**: não
+  prometa que acerta, nem que substitui contador ou consultor.
+- Mostre um mockup de WhatsApp com **dados fictícios** e a legenda "Exemplo ilustrativo", como
+  nos outros (Barbearia do Zé). O material de divulgação já tem um, em
+  `C:\projetosApp\agende_flutter_divulgar\assets\mockups.js` (peça `fechamento`).
+
 **Planos de assinatura para os seus clientes** (diferencial forte, merece
 seção própria)
 - A barbearia cria planos (ex.: "4 cortes por mês"): valor, quantidade de
@@ -144,8 +173,13 @@ algumas destas palavras. A landing segue a mesma régua.
 - pagamento online, cobrança automática ou recorrente, **PIX**, **boleto**,
   gateway, "receba pelo app" (o app **registra**, não cobra; nem a mensalidade
   do Agende Já tem checkout);
-- **"relatórios"** (existem totais do mês em Recebimentos e na agenda, e é
-  isso que se diz);
+- **tela de relatórios, gráficos ou dashboard.** Não existe. O que existe são os totais do
+  mês em Recebimentos e na agenda, e o **fechamento semanal e mensal por WhatsApp** (§4). A
+  palavra "relatório" só aparece na descrição desse fechamento;
+- que o fechamento seja **configurável** (horário, frequência, destinatário), enviado por
+  e-mail ou pedido sob demanda, ou que a IA "responda perguntas", "converse" ou "acerte";
+- **"IA" como slogan ou diferencial genérico** ("app com IA", "inteligência artificial"). A IA
+  só aparece como "análise escrita por IA", na descrição do fechamento;
 - **App Store, Google Play, "baixe o app"** (é web e instala na tela inicial);
 - login com Google, Apple ou Facebook (só e-mail e senha);
 - acesso próprio do profissional ou colaborador (futuro, não existe);
@@ -159,7 +193,8 @@ algumas destas palavras. A landing segue a mesma régua.
   inventado.** Se quiser prova social, deixe o componente pronto e peça os
   dados reais ao usuário.
 
-**Em vez disso, diga:** "registre o que recebeu", "totais do mês", "funciona
+**Em vez disso, diga:** "registre o que recebeu", "totais do mês", "fechamento semanal e
+mensal no WhatsApp", "análise escrita por IA, como segunda opinião", "funciona
 no navegador e instala na tela inicial como app", "o pagamento é feito na
 barbearia, como sempre".
 
@@ -259,12 +294,14 @@ Copie de `C:\projetosApp\agende_flutter` para `public/`:
 - Vocabulário de barbearia: balcão, encaixe, folga, cliente faltou, corte,
   barba, horário vago.
 - Honesto e sem exagero. Nada de "revolucionário", "o melhor do Brasil" ou
-  "IA". Sem emojis.
+  "IA" como slogan (veja §6). Sem emojis nos textos da página; só as mensagens de WhatsApp de
+  exemplo do fechamento os trazem, porque reproduzem as do fluxo.
 - Benefício antes da funcionalidade: "Pare de responder 'tem horário?' no
   WhatsApp" → "o cliente vê os horários livres e agenda sozinho".
 - Dores reais para explorar: agenda no caderno ou no WhatsApp, cliente que
   esquece e falta, horário vago, controle de quem pagou, plano mensal
-  controlado de cabeça.
+  controlado de cabeça, e não saber como a semana fechou (quanto entrou, quem faltou, onde
+  sobrou horário).
 
 ## 10. Estrutura sugerida da página
 
@@ -281,6 +318,7 @@ Copie de `C:\projetosApp\agende_flutter` para `public/`:
 6. **Para a sua barbearia:** grade de funcionalidades (§4), agrupadas.
 7. **Planos de assinatura para os seus clientes:** seção-destaque. Fidelize
    com plano mensal e controle os créditos sem planilha.
+   **Fechamento no WhatsApp:** seção curta, com o mockup das duas mensagens (§4).
 8. **Preços** (§7).
 9. **Perguntas frequentes** (§11), em `<details>`.
 10. **CTA final** + **rodapé** com WhatsApp, link "Entrar" e
@@ -309,6 +347,12 @@ Tiradas da Ajuda do app. Pode reescrever o estilo, sem mudar o fato.
   para escolher o plano e continuar. Seus dados ficam guardados.
 - **Meus dados ficam seguros?** Cada barbearia vê só os próprios dados, e cada
   cliente só os dele.
+- **O Agende Já manda algum resumo da semana?** Sim. Todo domingo de manhã chega no WhatsApp
+  o fechamento da semana, e no dia 1º o do mês: primeiro o relatório do sistema, depois uma
+  análise escrita por IA. Vai para o telefone de "Dados da barbearia". Se não houve
+  agendamento no período, não chega nada. (Confirme a marca `is_relatorio`, §4.)
+- **A análise da IA é confiável?** Ela interpreta os números do relatório e serve como segunda
+  opinião. Pode errar e não substitui contador nem consultor.
 - **Funciona para salão de beleza?** Sim, serve para qualquer negócio que
   atende com hora marcada por profissional. O produto nasceu para barbearia, e
   a linguagem dele é de barbearia.
@@ -346,6 +390,11 @@ Tiradas da Ajuda do app. Pode reescrever o estilo, sem mudar o fato.
   `Contact` no WhatsApp. O id fica em `src/data/analytics.ts`; sem id, não há
   Pixel nem aviso. `/privacidade/` descreve o que está ligado. Se houver mais
   analytics, Cloudflare Web Analytics (sem cookie).
+- **Fechamento por IA:** o relatório da barbearia, que inclui nomes de clientes, é enviado a um
+  modelo de IA (hoje, DeepSeek) para escrever a análise. Se a página falar do fechamento,
+  `/privacidade/` precisa dizer isso, e o usuário decide o texto.
+- **`scripts/check-copy.mjs`** hoje reprova `relatorio`. Ao publicar a seção do fechamento, troque
+  essa regra por uma que aceite a palavra só ali (ou escreva "fechamento" em todo o resto).
 - Links externos para o app abrem na mesma aba; WhatsApp em nova aba com
   `rel="noopener"`.
 
@@ -355,10 +404,12 @@ Tiradas da Ajuda do app. Pode reescrever o estilo, sem mudar o fato.
 - [ ] Todo CTA aponta para uma URL da §3. Nenhuma outra rota do app aparece.
 - [ ] Preços e limites batem com a §7 e vêm de um arquivo de dados só.
 - [ ] Busca no texto final (sem diferenciar maiúsculas e acentos) não acha:
-  `pix`, `boleto`, `relatório`, `app store`, `play store`, `google play`,
+  `pix`, `boleto`, `app store`, `play store`, `google play`,
   `cobrança automática`, `offline`, `backup`, `criptografia`, `24h`,
   `baixe o app`.
-- [ ] Nenhum depoimento, número ou logo de cliente inventado.
+- [ ] "relatório" e "IA" só aparecem na seção do fechamento (§4), e nunca como slogan.
+- [ ] Nenhum depoimento, número ou logo de cliente inventado. Os números do mockup do fechamento
+  são fictícios e têm a legenda "Exemplo ilustrativo".
 - [ ] Revisado a 360, 768 e 1440 px, nos temas claro e escuro.
 - [ ] Contraste AA conferido, com atenção ao dourado (§8).
 - [ ] OG image aparece no preview (teste com um validador de Open Graph).
@@ -376,5 +427,6 @@ Tudo em `C:\projetosApp\agende_flutter`:
 | `docs\11-design-system.md` | paleta, tipografia e contraste |
 | `docs\12-plataforma.md` | planos do SaaS e trial |
 | `docs\13-primeiros-passos.md` | guia de configuração inicial |
+| n8n, fluxos "Relatório Semanal Automático V2" e "Relatório Mensal Automático v2" | o fechamento semanal e mensal (§4); o código não está neste repositório |
 
 Só leitura: **não edite nada naquele repositório.**
