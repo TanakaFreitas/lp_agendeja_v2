@@ -17,6 +17,16 @@ export const faq: { pergunta: string; resposta: string }[] = [
       'Sim. Ao agendar, o cliente e o profissional recebem a mensagem pelo WhatsApp, e o cliente recebe um lembrete antes do horário. Se o horário for cancelado, os dois são avisados.',
   },
   {
+    pergunta: 'O Agende Já manda algum resumo da semana?',
+    resposta:
+      'Sim. Todo domingo de manhã chega no WhatsApp o fechamento da semana, e no dia 1º o do mês: primeiro uma mensagem com os números da barbearia, logo em seguida uma análise escrita por IA. Vai para o telefone cadastrado nos dados da barbearia, e todas as barbearias recebem, sem precisar ligar nada. Se não houve agendamento no período, não chega nada.',
+  },
+  {
+    pergunta: 'A análise da IA é confiável?',
+    resposta:
+      'Ela interpreta os números do fechamento e serve como segunda opinião. Pode errar e não substitui contador nem consultor.',
+  },
+  {
     pergunta: 'Posso ter mais de um profissional?',
     resposta:
       'Sim, até o limite do seu plano. Cada profissional tem o próprio expediente, o próprio intervalo de almoço e os serviços que atende.',
