@@ -7,6 +7,7 @@ import ComoFunciona from '../components/ComoFunciona.astro';
 import ParaCliente from '../components/ParaCliente.astro';
 import ParaBarbearia from '../components/ParaBarbearia.astro';
 import PlanosAssinatura from '../components/PlanosAssinatura.astro';
+import Fechamento from '../components/Fechamento.astro';
 import Precos from '../components/Precos.astro';
 import Faq from '../components/Faq.astro';
 import CtaFinal from '../components/CtaFinal.astro';
@@ -14,7 +15,7 @@ import Footer from '../components/Footer.astro';
 import { DIAS_TESTE } from '../data/planos';
 
 const title = 'Agende Já — agendamento online para barbearias';
-const description = `Seu cliente agenda sozinho pelo link da barbearia e recebe confirmação e lembrete no WhatsApp. Agenda, profissionais, planos de assinatura e recebimentos num lugar só. Teste grátis por ${DIAS_TESTE} dias, sem cartão.`;
+const description = `Seu cliente agenda sozinho pelo link da barbearia e recebe confirmação e lembrete no WhatsApp. Agenda, profissionais, planos de assinatura, recebimentos e o fechamento da semana no WhatsApp num lugar só. Teste grátis por ${DIAS_TESTE} dias, sem cartão.`;
 ---
 
 <Base title={title} description={description}>
@@ -26,6 +27,7 @@ const description = `Seu cliente agenda sozinho pelo link da barbearia e recebe 
     <ParaCliente />
     <ParaBarbearia />
     <PlanosAssinatura />
+    <Fechamento />
     <Precos />
     <Faq />
     <CtaFinal />

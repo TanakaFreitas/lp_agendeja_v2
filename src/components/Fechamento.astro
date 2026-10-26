@@ -1,0 +1,163 @@
+---
+import Icon, { type IconName } from './Icon.astro';
+import MockFechamento from './mockups/MockFechamento.astro';
+
+const pontos: { icon: IconName; titulo: string; texto: string }[] = [
+  {
+    icon: 'calendar',
+    titulo: 'Todo domingo e todo mês, sem pedir',
+    texto:
+      'Todo domingo de manhã chega o fechamento da semana que acabou. No dia 1º, o do mês anterior. Vai para o WhatsApp do telefone cadastrado nos dados da barbearia.',
+  },
+  {
+    icon: 'list',
+    titulo: 'Primeiro, os números',
+    texto:
+      'Quanto entrou, o que ficou pendente, o que se perdeu em cancelamento, o ticket médio, as formas de pagamento, os dias mais fortes, os melhores clientes e os serviços que mais saem.',
+  },
+  {
+    icon: 'chat',
+    titulo: 'Depois, a análise',
+    texto:
+      'Logo em seguida chega uma segunda mensagem: uma análise escrita por IA que lê esses números, explica o que eles significam e sugere o foco para a semana ou para o mês.',
+  },
+  {
+    icon: 'check',
+    titulo: 'Nada para configurar',
+    texto:
+      'Todas as barbearias recebem, em todos os planos e no teste grátis. Se não houve agendamento no período, não chega nada.',
+  },
+];
+---
+
+<section id="fechamento" class="section" aria-labelledby="fechamento-title">
+  <div class="container grid">
+    <div class="visual">
+      <MockFechamento />
+      <p class="caption">Exemplo ilustrativo, com dados fictícios</p>
+    </div>
+
+    <div>
+      <div class="section-head">
+        <span class="eyebrow">Fechamento no WhatsApp</span>
+        <h2 id="fechamento-title" class="section-title">
+          Todo domingo e todo primeiro dia do mês, o fechamento da sua barbearia chega no WhatsApp
+        </h2>
+        <p class="lead">
+          Você não precisa abrir o app nem montar planilha para saber como a semana terminou. O Agende Já manda os
+          números e uma segunda opinião sobre eles.
+        </p>
+      </div>
+
+      <ul class="pontos">
+        {
+          pontos.map((p) => (
+            <li class="card ponto">
+              <span class="icon-badge">
+                <Icon name={p.icon} />
+              </span>
+              <h3>{p.titulo}</h3>
+              <p>{p.texto}</p>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="obs">
+        <Icon name="help" size={20} />
+        <span>
+          A análise é escrita por IA a partir dos números da sua barbearia e serve como segunda opinião: ela pode errar
+          e não substitui contador nem consultor.
+        </span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    gap: var(--s-48);
+  }
+
+  .section-head {
+    margin-bottom: var(--s-32);
+  }
+
+  .visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-12);
+  }
+
+  .visual :global(.phone) {
+    max-width: 280px;
+  }
+
+  .caption {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+  }
+
+  .pontos {
+    list-style: none;
+    display: grid;
+    gap: var(--s-16);
+  }
+
+  .ponto {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-8);
+    padding: var(--s-24);
+  }
+
+  .ponto .icon-badge {
+    margin-bottom: var(--s-4);
+  }
+
+  h3 {
+    font-size: 1.125rem;
+  }
+
+  .ponto p {
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+  }
+
+  .obs {
+    display: flex;
+    gap: var(--s-12);
+    align-items: flex-start;
+    margin-top: var(--s-24);
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+  }
+
+  .obs :global(svg) {
+    flex: none;
+    margin-top: 2px;
+    color: var(--text);
+  }
+
+  @media (min-width: 640px) {
+    .pontos {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 960px) {
+    .grid {
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      align-items: center;
+      gap: var(--s-64);
+    }
+  }
+
+  @media (max-width: 959px) {
+    .visual {
+      order: 1;
+    }
+  }
+</style>
