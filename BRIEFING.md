@@ -104,12 +104,13 @@ página). Lido em 26/10/2026 nos fluxos do n8n "Relatório Semanal Automático V
      significam e fecha com uma ação para a semana ou uma meta para o mês.
 - **Só chega se houve agendamento no período.** Barbearia sem movimento não recebe nada.
 - O dono **não liga nem configura nada**, e o horário e o conteúdo não são ajustáveis.
-- ⚠ **Confirme antes de dizer "todas as barbearias recebem".** O fluxo só envia a quem tem
-  `empresa.is_relatorio` ligado, e o app não tem tela para isso (`docs/08-divida-tecnica.md`, B8).
-  O usuário informou em 26/10/2026 que a marca já vem ligada, mas na execução de 25/10 o fluxo
-  enviou a 2 barbearias. Peça a confirmação antes de afirmar na página.
-- Na página, diga **"fechamento semanal e mensal"** e use "relatório" só para a primeira
-  mensagem. A análise é "escrita por IA" e deve ser apresentada como **segunda opinião**: não
+- **Todas as barbearias recebem**, em todos os planos e no teste grátis (confirmado pelo usuário
+  em 26/10/2026, que mandou escrever assim). Por baixo, o fluxo só envia a quem tem
+  `empresa.is_relatorio` ligado, e o app não tem tela para isso (`docs/08-divida-tecnica.md`,
+  B8): a marca precisa continuar ligada em toda barbearia nova. Na execução de 25/10 o fluxo
+  enviou a 2 barbearias.
+- Na página, diga **"fechamento semanal e mensal"** e **não use a palavra "relatório"**: o
+  `scripts/check-copy.mjs` a reprova, e "fechamento", "resumo" e "números" bastam. A análise é "escrita por IA" e deve ser apresentada como **segunda opinião**: não
   prometa que acerta, nem que substitui contador ou consultor.
 - Mostre um mockup de WhatsApp com **dados fictícios** e a legenda "Exemplo ilustrativo", como
   nos outros (Barbearia do Zé). O material de divulgação já tem um, em
@@ -175,7 +176,7 @@ algumas destas palavras. A landing segue a mesma régua.
   do Agende Já tem checkout);
 - **tela de relatórios, gráficos ou dashboard.** Não existe. O que existe são os totais do
   mês em Recebimentos e na agenda, e o **fechamento semanal e mensal por WhatsApp** (§4). A
-  palavra "relatório" só aparece na descrição desse fechamento;
+  palavra "relatório" fica fora da página (o `check-copy.mjs` a reprova);
 - que o fechamento seja **configurável** (horário, frequência, destinatário), enviado por
   e-mail ou pedido sob demanda, ou que a IA "responda perguntas", "converse" ou "acerte";
 - **"IA" como slogan ou diferencial genérico** ("app com IA", "inteligência artificial"). A IA
@@ -318,7 +319,8 @@ Copie de `C:\projetosApp\agende_flutter` para `public/`:
 6. **Para a sua barbearia:** grade de funcionalidades (§4), agrupadas.
 7. **Planos de assinatura para os seus clientes:** seção-destaque. Fidelize
    com plano mensal e controle os créditos sem planilha.
-   **Fechamento no WhatsApp:** seção curta, com o mockup das duas mensagens (§4).
+   **Fechamento no WhatsApp:** seção curta, com o mockup das duas mensagens (§4). Já
+   implementada em `src/components/Fechamento.astro`.
 8. **Preços** (§7).
 9. **Perguntas frequentes** (§11), em `<details>`.
 10. **CTA final** + **rodapé** com WhatsApp, link "Entrar" e
@@ -350,7 +352,7 @@ Tiradas da Ajuda do app. Pode reescrever o estilo, sem mudar o fato.
 - **O Agende Já manda algum resumo da semana?** Sim. Todo domingo de manhã chega no WhatsApp
   o fechamento da semana, e no dia 1º o do mês: primeiro o relatório do sistema, depois uma
   análise escrita por IA. Vai para o telefone de "Dados da barbearia". Se não houve
-  agendamento no período, não chega nada. (Confirme a marca `is_relatorio`, §4.)
+  agendamento no período, não chega nada.
 - **A análise da IA é confiável?** Ela interpreta os números do relatório e serve como segunda
   opinião. Pode errar e não substitui contador nem consultor.
 - **Funciona para salão de beleza?** Sim, serve para qualquer negócio que
@@ -391,10 +393,9 @@ Tiradas da Ajuda do app. Pode reescrever o estilo, sem mudar o fato.
   Pixel nem aviso. `/privacidade/` descreve o que está ligado. Se houver mais
   analytics, Cloudflare Web Analytics (sem cookie).
 - **Fechamento por IA:** o relatório da barbearia, que inclui nomes de clientes, é enviado a um
-  modelo de IA (hoje, DeepSeek) para escrever a análise. Se a página falar do fechamento,
-  `/privacidade/` precisa dizer isso, e o usuário decide o texto.
-- **`scripts/check-copy.mjs`** hoje reprova `relatorio`. Ao publicar a seção do fechamento, troque
-  essa regra por uma que aceite a palavra só ali (ou escreva "fechamento" em todo o resto).
+  modelo de IA para escrever a análise. A página e a `/privacidade/` dizem "um modelo de IA", sem
+  citar o fornecedor (decidido pelo usuário em 26/10/2026).
+- **`scripts/check-copy.mjs`** continua reprovando `relatorio`, e a landing usa "fechamento".
 - Links externos para o app abrem na mesma aba; WhatsApp em nova aba com
   `rel="noopener"`.
 
@@ -407,7 +408,8 @@ Tiradas da Ajuda do app. Pode reescrever o estilo, sem mudar o fato.
   `pix`, `boleto`, `app store`, `play store`, `google play`,
   `cobrança automática`, `offline`, `backup`, `criptografia`, `24h`,
   `baixe o app`.
-- [ ] "relatório" e "IA" só aparecem na seção do fechamento (§4), e nunca como slogan.
+- [ ] "relatório" não aparece na página, e "IA" só aparece na seção do fechamento (§4), nunca
+  como slogan.
 - [ ] Nenhum depoimento, número ou logo de cliente inventado. Os números do mockup do fechamento
   são fictícios e têm a legenda "Exemplo ilustrativo".
 - [ ] Revisado a 360, 768 e 1440 px, nos temas claro e escuro.
