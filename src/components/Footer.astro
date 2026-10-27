@@ -101,7 +101,8 @@ const ano = new Date().getFullYear();
     flex-wrap: wrap;
     align-items: center;
     gap: var(--s-4) var(--s-24);
-    padding-block: var(--s-16) var(--s-32);
+    /* No celular, espaço para o botão flutuante do WhatsApp não tapar os links. */
+    padding-block: var(--s-16) calc(var(--s-32) + 72px);
     border-top: 1px solid var(--border);
     color: var(--text-muted);
     font-size: 0.875rem;
@@ -131,6 +132,10 @@ const ano = new Date().getFullYear();
 
     .links {
       margin-inline: 0;
+    }
+
+    .legal {
+      padding-bottom: var(--s-32);
     }
   }
 </style>
