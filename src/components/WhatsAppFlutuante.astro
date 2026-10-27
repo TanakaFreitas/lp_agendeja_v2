@@ -1,0 +1,72 @@
+---
+/**
+ * Botão do WhatsApp fixo no canto, em todas as páginas. O `Contact` do Pixel sai pelo
+ * listener de ConsentimentoCookies.astro, que já pega todo link para wa.me. Enquanto o
+ * aviso de cookies está aberto, o botão sobe a altura dele para não ficar por baixo.
+ */
+import WhatsAppIcon from './WhatsAppIcon.astro';
+import { whatsapp } from '../data/links';
+---
+
+<a class="whatsapp-flutuante" href={whatsapp()} target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <WhatsAppIcon size={28} />
+</a>
+
+<script>
+  const aviso = document.querySelector<HTMLElement>('#consentimento-cookies');
+
+  if (aviso) {
+    const atualizar = () => {
+      const altura = aviso.hidden ? 0 : aviso.offsetHeight;
+      document.documentElement.style.setProperty('--aviso-cookies-h', `${altura}px`);
+    };
+    new ResizeObserver(atualizar).observe(aviso);
+    new MutationObserver(atualizar).observe(aviso, { attributes: true, attributeFilter: ['hidden'] });
+    atualizar();
+  }
+</script>
+
+<style>
+  .whatsapp-flutuante {
+    --margem: var(--s-16);
+    position: fixed;
+    right: calc(var(--margem) + env(safe-area-inset-right));
+    bottom: calc(var(--margem) + var(--aviso-cookies-h, 0px) + env(safe-area-inset-bottom));
+    z-index: 40;
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    border-radius: var(--r-pill);
+    background: #128c7e;
+    color: #ffffff;
+    box-shadow: var(--shadow-lg);
+    transition:
+      background-color 0.15s ease,
+      transform 0.15s ease;
+  }
+
+  .whatsapp-flutuante:hover {
+    background: color-mix(in srgb, #128c7e 85%, #000000);
+  }
+
+  .whatsapp-flutuante:active {
+    transform: translateY(1px);
+  }
+
+  .whatsapp-flutuante:focus-visible {
+    border-radius: var(--r-pill);
+  }
+
+  @media (min-width: 768px) {
+    .whatsapp-flutuante {
+      --margem: var(--s-24);
+    }
+  }
+
+  @media print {
+    .whatsapp-flutuante {
+      display: none;
+    }
+  }
+</style>
