@@ -1,6 +1,6 @@
 ---
 title: 'Horário vago não volta: como encher a agenda da barbearia nos dias fracos'
-description: 'Todo horário que passa sem cliente é faturamento perdido para sempre. Veja como descobrir onde estão os buracos da sua semana e o que fazer para preenchê-los sem baixar o valor do seu corte.'
+description: 'Horário que passa sem cliente é faturamento perdido para sempre. Veja como achar os buracos da semana e preenchê-los sem baixar o valor do seu corte.'
 pubDate: 2026-10-21
 ---
 
@@ -57,7 +57,7 @@ O cliente que tem horário flexível (autônomo, aposentado, estudante, quem tra
 
 ### Ofereça um plano de assinatura que vale em dias específicos
 
-Plano mensal com cortes inclusos é ótimo para garantir receita. E ele pode ajudar no dia fraco também: um plano que **vale só de segunda a quinta**, por exemplo, pode ter um preço mais atraente e coloca o cliente de plano justamente nos dias que precisam de movimento.
+[Plano mensal com cortes inclusos](/blog/plano-de-assinatura-na-barbearia/) é ótimo para garantir receita. E ele pode ajudar no dia fraco também: um plano que **vale só de segunda a quinta**, por exemplo, pode ter um preço mais atraente e coloca o cliente de plano justamente nos dias que precisam de movimento.
 
 Assim, o sábado fica para o cliente avulso, que paga o preço cheio.
 
@@ -69,7 +69,7 @@ Cliente que passa na porta e pergunta "tem como cortar agora?" é horário vago 
 
 Se a agenda mostra, semana após semana, que ninguém aparece antes das dez na segunda, talvez não valha abrir às oito. Use essas horas para folga do profissional e estenda o expediente no dia em que falta horário. Expediente diferente por dia é normal e o cliente se acostuma, desde que a agenda mostre a verdade.
 
-Para feriado ou um dia em que você vai abrir mais tarde, marque como dia especial, em vez de mudar o expediente da semana inteira.
+Para feriado, folga ou férias, marque um recesso; para um dia em que você vai abrir mais tarde, um dia especial. Assim você não muda o expediente da semana inteira. No fim do ano é o contrário: o problema é horário de menos, e vale ver [como organizar a agenda de dezembro](/blog/agenda-de-dezembro-na-barbearia/).
 
 ### Reduza as faltas
 
@@ -85,4 +85,4 @@ Um horário marcado que ninguém usa é o pior tipo de horário vago: você nem 
 - **Expediente por dia**, com almoço, recesso e dia especial com horário diferente.
 - **Confirmação e lembrete pelo WhatsApp** para diminuir as faltas.
 
-Funciona no navegador e instala na tela inicial como app. O teste é grátis e não pede cartão.
+Funciona no navegador e instala na tela inicial como app. [O teste é grátis](/#planos) e não pede cartão.

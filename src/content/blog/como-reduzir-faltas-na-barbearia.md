@@ -1,6 +1,6 @@
 ---
 title: 'Cliente marcou e não veio: como reduzir as faltas na barbearia'
-description: 'A falta custa o horário e ainda impede outro cliente de usar. Entenda por que o cliente falta e o que fazer, da confirmação no WhatsApp a uma regra clara de cancelamento, para que isso aconteça cada vez menos.'
+description: 'A falta custa o horário e ainda impede outro cliente de usar. Entenda por que o cliente falta e o que fazer, da confirmação a uma regra clara de cancelamento.'
 pubDate: 2026-10-21
 ---
 
@@ -69,7 +69,7 @@ Se não adiantar, a barbearia pode bloquear o acesso dele ao app e passar a marc
 
 Para o cliente de plano mensal, uma regra simples funciona bem: **faltou, o crédito do mês é consumido; cancelou dentro do prazo, não é**. O cliente entende, porque é a mesma lógica de qualquer horário reservado, e passa a avisar quando não pode ir.
 
-Combine isso na hora de vender o plano, e não no dia da falta.
+Combine isso na hora de vender o plano, e não no dia da falta. Os outros pontos do plano (serviços, dias e preço) estão em [como montar o plano mensal de cortes](/blog/plano-de-assinatura-na-barbearia/).
 
 ## Como o Agende Já ajuda
 
@@ -81,6 +81,6 @@ Combine isso na hora de vender o plano, e não no dia da falta.
 - **"Cliente faltou"** direto no agendamento. Se o cliente tem plano, a falta consome o crédito; o cancelamento dentro do prazo não consome.
 - **Bloquear o acesso** de um cliente, quando for o caso.
 
-Funciona no navegador e instala na tela inicial como app. O teste é grátis e não pede cartão.
+Funciona no navegador e instala na tela inicial como app. [O teste é grátis](/#planos) e não pede cartão.
 
 Menos falta significa menos horário vago. Para ir além, veja [como preencher os horários vagos da semana](/blog/como-preencher-horarios-vagos/) e, se você ainda agenda por mensagem, [como sair da agenda no WhatsApp ou no caderno](/blog/agenda-no-whatsapp-ou-caderno/).

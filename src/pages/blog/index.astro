@@ -11,7 +11,7 @@ const lista = await artigos();
 
 const title = 'Blog do Agende Já — dicas para barbearias';
 const description =
-  'Dicas práticas para o dono de barbearia: organizar a agenda, preencher horários vagos e reduzir as faltas de clientes.';
+  'Dicas para o dono de barbearia: agenda, horários vagos, faltas, dezembro, plano mensal de cortes e quanto a barbearia faturou no mês.';
 const canonical = new URL('blog/', SITE).href;
 
 const jsonLd = {
@@ -22,6 +22,12 @@ const jsonLd = {
   description,
   inLanguage: 'pt-BR',
   publisher: { '@type': 'Organization', name: 'Agende Já', url: SITE },
+  blogPost: lista.map((a) => ({
+    '@type': 'BlogPosting',
+    headline: a.data.title,
+    url: new URL(urlDoArtigo(a), SITE).href,
+    datePublished: a.data.pubDate.toISOString(),
+  })),
 };
 ---
 
@@ -33,7 +39,7 @@ const jsonLd = {
         <div class="section-head">
           <span class="eyebrow">Blog</span>
           <h1 id="blog-title" class="section-title">Dicas para a sua barbearia</h1>
-          <p class="lead">Agenda, horário vago, cliente que falta. O que dá para fazer no dia a dia do balcão.</p>
+          <p class="lead">Agenda, horário vago, cliente que falta, plano mensal e o dinheiro do mês. O que dá para fazer no dia a dia do balcão.</p>
         </div>
 
         <ul class="grid" role="list">

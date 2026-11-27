@@ -1,6 +1,6 @@
 ---
 title: 'Plano mensal de cortes: como montar o da sua barbearia sem perder dinheiro'
-description: 'O plano de assinatura traz dinheiro previsível e cliente que volta, mas mal montado vira prejuízo. Veja como escolher os serviços, os dias, o preço e a regra de falta antes de vender o primeiro.'
+description: 'O plano de assinatura traz dinheiro previsível e cliente que volta, mas mal montado vira prejuízo. Veja como escolher serviços, dias, preço e regra de falta.'
 pubDate: 2026-11-16
 ---
 
@@ -77,4 +77,4 @@ Não precisa de campanha. Comece pelo cliente que já vem sempre:
 - **O cliente pode pedir o plano pelo app**, se você ligar a opção. O pedido chega aguardando pagamento, e a validade começa a contar quando ele paga.
 - **"Colocar num plano"** direto na lista de clientes, e o filtro "Com plano" para ver quem tem.
 
-O pagamento do plano é feito na barbearia, como sempre, e o app registra. Funciona no navegador e instala na tela inicial como app. O teste é grátis e não pede cartão.
+O pagamento do plano é feito na barbearia, como sempre, e o app registra. Funciona no navegador e instala na tela inicial como app. [O teste é grátis](/#planos) e não pede cartão.

@@ -1,6 +1,6 @@
 ---
 title: 'Agenda no WhatsApp ou no caderno: o que isso custa e como sair sem perder cliente'
-description: 'Marcar horário por mensagem parece de graça, mas cobra em tempo, em horário marcado duas vezes e em cliente que desiste. Veja como migrar para o agendamento pelo link, em etapas, sem assustar quem já é cliente.'
+description: 'Marcar por mensagem parece de graça, mas custa tempo, horário marcado duas vezes e cliente que desiste. Veja como migrar para o link sem assustar o cliente.'
 pubDate: 2026-10-21
 ---
 
@@ -27,7 +27,7 @@ Agendar por mensagem não tem mensalidade, mas tem preço. Ele só não vem escr
 - Você responde mensagem de horário enquanto atende.
 - Já marcou dois clientes no mesmo horário mais de uma vez.
 - O cliente fixo reclama que "é difícil conseguir horário com você".
-- Você não sabe dizer, sem abrir o caderno, como está a agenda de amanhã.
+- Você não sabe dizer, sem abrir o caderno, como está a agenda de amanhã. Nem [quanto a barbearia faturou](/blog/quanto-a-barbearia-faturou/) no mês.
 - A barbearia tem mais de um profissional e cada um anota de um jeito.
 
 Se marcou dois ou mais, o caderno já está custando caro.
@@ -89,6 +89,6 @@ O Agende Já foi feito para essa troca:
 - **Agendamento manual** e **encaixe rápido** para quem marca por telefone ou chega na hora, na mesma agenda.
 - **Guia de primeiros passos** na tela inicial, que mostra o que falta configurar antes de divulgar o link.
 
-Funciona no navegador do celular ou do computador e instala na tela inicial como app. O teste é grátis e não pede cartão.
+Funciona no navegador do celular ou do computador e instala na tela inicial como app. [O teste é grátis](/#planos) e não pede cartão.
 
 Depois de organizar a agenda, o próximo passo é atacar os buracos dela. Veja [como preencher os horários vagos da semana](/blog/como-preencher-horarios-vagos/) e [como reduzir as faltas de clientes](/blog/como-reduzir-faltas-na-barbearia/).
