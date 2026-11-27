@@ -12,10 +12,10 @@ import Precos from '../components/Precos.astro';
 import Faq from '../components/Faq.astro';
 import CtaFinal from '../components/CtaFinal.astro';
 import Footer from '../components/Footer.astro';
-import { DIAS_TESTE } from '../data/planos';
+import { DIAS_TESTE, BLACK_FRIDAY } from '../data/planos';
 
 const title = 'Agende Já — agendamento online para barbearias';
-const description = `Seu cliente agenda sozinho pelo link da barbearia e recebe confirmação e lembrete no WhatsApp. Agenda, profissionais, planos de assinatura, recebimentos e o fechamento da semana no WhatsApp num lugar só. Teste grátis por ${DIAS_TESTE} dias, sem cartão.`;
+const description = `Seu cliente agenda sozinho pelo link da barbearia e recebe confirmação e lembrete no WhatsApp. Agenda, profissionais, planos de assinatura, recebimentos e o fechamento da semana no WhatsApp num lugar só. Teste grátis por ${DIAS_TESTE} dias, sem cartão.${BLACK_FRIDAY ? ` Black Friday até ${BLACK_FRIDAY.cadastroAte}: a partir de ${BLACK_FRIDAY.aPartirDe} por mês, para sempre.` : ''}`;
 ---
 
 <Base title={title} description={description}>

@@ -3,7 +3,7 @@ import Icon from './Icon.astro';
 import WhatsAppIcon from './WhatsAppIcon.astro';
 import Logo from './Logo.astro';
 import { CADASTRO, whatsapp } from '../data/links';
-import { DIAS_TESTE } from '../data/planos';
+import { DIAS_TESTE, BLACK_FRIDAY } from '../data/planos';
 ---
 
 <section class="cta-final" aria-labelledby="cta-title">
@@ -11,7 +11,10 @@ import { DIAS_TESTE } from '../data/planos';
   <div class="container inner">
     <Logo size={72} loading="lazy" />
     <h2 id="cta-title">Comece hoje a receber agendamentos pelo link</h2>
-    <p>Crie a conta, siga o guia de primeiros passos e divulgue o link. São {DIAS_TESTE} dias grátis, sem cartão.</p>
+    <p>
+      Crie a conta, siga o guia de primeiros passos e divulgue o link. São {DIAS_TESTE} dias grátis, sem cartão.
+      {BLACK_FRIDAY && ` Crie a conta até ${BLACK_FRIDAY.cadastroAte} e o preço da Black Friday fica guardado para sempre.`}
+    </p>
     <div class="ctas">
       <a class="btn btn--light btn--lg" href={CADASTRO}>
         Criar minha barbearia

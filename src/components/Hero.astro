@@ -4,7 +4,7 @@ import WhatsAppIcon from './WhatsAppIcon.astro';
 import MockHorarios from './mockups/MockHorarios.astro';
 import MockAgendaAdmin from './mockups/MockAgendaAdmin.astro';
 import { CADASTRO, whatsapp } from '../data/links';
-import { DIAS_TESTE } from '../data/planos';
+import { DIAS_TESTE, BLACK_FRIDAY } from '../data/planos';
 ---
 
 <section class="hero" id="topo" aria-labelledby="hero-title">
@@ -28,6 +28,13 @@ import { DIAS_TESTE } from '../data/planos';
       </div>
       <ul class="support">
         <li><Icon name="check" size={18} />Sem cartão</li>
+        {
+          BLACK_FRIDAY && (
+            <li>
+              <Icon name="check" size={18} />Black Friday até {BLACK_FRIDAY.cadastroAte}: a partir de {BLACK_FRIDAY.aPartirDe} por mês
+            </li>
+          )
+        }
         <li><Icon name="check" size={18} />Funciona no navegador</li>
         <li><Icon name="check" size={18} />Instala na tela inicial como app</li>
       </ul>
