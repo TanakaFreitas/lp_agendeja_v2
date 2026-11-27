@@ -1,6 +1,6 @@
 ---
 title: 'Dezembro na barbearia: como organizar a agenda do mês mais cheio'
-description: 'Festa da firma, formatura, Natal e Réveillon: dezembro enche a cadeira e testa a agenda. Veja o que acertar ainda em novembro para atender mais sem atrasar, sem marcar dois no mesmo horário e sem perder o cliente fixo.'
+description: 'Festa da firma, formatura, Natal e Réveillon: dezembro enche a cadeira. Veja o que acertar para atender mais sem atrasar e sem marcar dois no mesmo horário.'
 pubDate: 2026-11-16
 ---
 
@@ -79,4 +79,4 @@ Depois da virada, o movimento costuma cair. Aproveite dezembro para lembrar o cl
 - **Painel de ocupação** por dia, com a equipe inteira lado a lado.
 - **Link da barbearia** com botão "Copiar" e **"QR Code (PDF)"** para imprimir e deixar no balcão.
 
-Funciona no navegador e instala na tela inicial como app. O teste é grátis e não pede cartão.
+Funciona no navegador e instala na tela inicial como app. [O teste é grátis](/#planos) e não pede cartão.

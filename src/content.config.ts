@@ -7,7 +7,8 @@ const blog = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/blog' }),
   schema: z.object({
     title: z.string(),
-    description: z.string(),
+    // 160 é o que o Google mostra; o que passa disso é cortado no meio da frase.
+    description: z.string().max(160),
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
   }),

@@ -1,6 +1,6 @@
 ---
 title: 'Quanto entrou no mês? Como saber o que a barbearia faturou sem planilha'
-description: 'Dinheiro na gaveta, maquininha, plano pago adiantado: no fim do mês, ninguém sabe ao certo quanto entrou. Veja como registrar cada atendimento, conferir o dia e entender o mês sem montar planilha.'
+description: 'Gaveta, maquininha, plano pago adiantado: no fim do mês, ninguém sabe quanto entrou. Veja como registrar, conferir o dia e entender o mês sem planilha.'
 pubDate: 2026-11-16
 ---
 
@@ -63,6 +63,6 @@ Um último cuidado, simples e difícil: **tire do caixa da barbearia um valor fi
 - **"Usar crédito do plano"** no atendimento coberto: baixa o crédito sem contar o corte como dinheiro novo.
 - **"Estornar lançamento"**, com motivo. O estornado sai da soma e continua visível em "Estornados".
 - **Recebimentos** mostra o total do mês e o total por forma de pagamento.
-- **Fechamento semanal e mensal no WhatsApp**: todo domingo de manhã, o da semana que acabou; no dia 1º, o do mês anterior. Chega primeiro uma mensagem com os números (total recebido, pendências e quem deve, perdas por cancelamento, valor médio por atendimento, formas de pagamento, dias da semana) e, logo em seguida, uma análise escrita por IA, que explica o que eles significam e sugere um foco. Ela serve como segunda opinião: pode errar e não substitui contador nem consultor.
+- **Fechamento semanal e mensal no WhatsApp**: todo domingo de manhã, o da semana que acabou; no dia 1º, o do mês anterior. Chega primeiro uma mensagem com os números (total recebido, pendências e quem deve, perdas por cancelamento, valor médio por atendimento, formas de pagamento, dias da semana) e, logo em seguida, uma análise escrita por IA, que explica o que eles significam e sugere um foco. Ela serve como segunda opinião: pode errar e não substitui contador nem consultor. O fechamento chega quando houve agendamento no período.
 
-O pagamento é feito na barbearia, como sempre, e o app registra. Funciona no navegador e instala na tela inicial como app. O teste é grátis e não pede cartão.
+O pagamento é feito na barbearia, como sempre, e o app registra. Funciona no navegador e instala na tela inicial como app. [O teste é grátis](/#planos) e não pede cartão.

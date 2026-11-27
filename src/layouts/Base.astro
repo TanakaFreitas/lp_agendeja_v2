@@ -19,10 +19,23 @@ interface Props {
   ogType?: 'website' | 'article';
   /** Dados estruturados da página. Padrão: o SoftwareApplication com os planos. */
   jsonLd?: Record<string, unknown>;
+  /** Imagem de compartilhamento própria, a partir da raiz (a arte de cada artigo). */
+  imagem?: string;
+  imagemAlt?: string;
+  /** Data de publicação do artigo (article:published_time). */
+  publicado?: Date;
 }
 
-const { title, description, canonical = SITE, ogType = 'website' } = Astro.props;
-const ogImage = new URL('/og/SocialShareImage.png', SITE).href;
+const {
+  title,
+  description,
+  canonical = SITE,
+  ogType = 'website',
+  imagem = '/og/SocialShareImage.png',
+  imagemAlt = 'Agende Já — agendamento online para barbearias',
+  publicado,
+} = Astro.props;
+const ogImage = new URL(imagem, SITE).href;
 
 const jsonLd = Astro.props.jsonLd ?? {
   '@context': 'https://schema.org',
@@ -74,7 +87,8 @@ const jsonLd = Astro.props.jsonLd ?? {
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Agende Já — agendamento online para barbearias" />
+    <meta property="og:image:alt" content={imagemAlt} />
+    {publicado && <meta property="article:published_time" content={publicado.toISOString()} />}
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
