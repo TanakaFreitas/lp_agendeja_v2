@@ -217,6 +217,11 @@ Valores do catálogo da plataforma (tabela `plano_plataforma`), lidos em
   O botão de cada plano pode ir para o cadastro (teste grátis) ou para o
   WhatsApp com o nome do plano no texto.
 - Ao fim do teste, **os dados ficam guardados**.
+- **Black Friday (27/11/2026, até 07/12/2026):** quem cria a conta até 07/12 guarda **para sempre**
+  Solo R$ 37, Profissional R$ 67 e Barber Pro R$ 97 (os preços de `precoBlackFriday` em
+  `src/data/planos.ts`), com os mesmos 30 dias grátis. O app não aplica sozinho: a equipe grava o
+  valor na adesão ao assinar pelo WhatsApp. Diga "R$ 37 em vez de R$ 67"; **nunca "metade" nem
+  "50%"** (R$ 37 é 55% de R$ 67). **Em 08/12/2026, troque `BLACK_FRIDAY` por `null` e publique.**
 - Destaque visual sugerido: Profissional.
 - Coloque os planos num único arquivo de dados (ex.: `src/data/planos.ts`).
   Preço muda, e tem de mudar num lugar só.

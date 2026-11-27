@@ -2,6 +2,7 @@
 import Logo from './Logo.astro';
 import Icon from './Icon.astro';
 import { CADASTRO, LOGIN } from '../data/links';
+import { BLACK_FRIDAY } from '../data/planos';
 
 const nav = [
   { href: '/#funcionalidades', label: 'Funcionalidades' },
@@ -11,6 +12,13 @@ const nav = [
 ];
 ---
 
+{
+  BLACK_FRIDAY && (
+    <a class="faixa-bf" href="/#planos">
+      Black Friday até {BLACK_FRIDAY.cadastroAte}: a partir de {BLACK_FRIDAY.aPartirDe} por mês, para sempre
+    </a>
+  )
+}
 <header class="site-header">
   <div class="pole-strip" aria-hidden="true"></div>
   <div class="container bar">
@@ -48,6 +56,23 @@ const nav = [
 </script>
 
 <style>
+  /* Fora do cabeçalho fixo, de propósito: assim o scroll-padding das âncoras continua certo. */
+  .faixa-bf {
+    display: block;
+    padding: var(--s-8) var(--s-16);
+    background: var(--secondary);
+    color: #0b191e;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .faixa-bf:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
   .site-header {
     position: sticky;
     top: 0;

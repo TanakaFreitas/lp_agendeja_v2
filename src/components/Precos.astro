@@ -2,7 +2,7 @@
 import Icon from './Icon.astro';
 import WhatsAppIcon from './WhatsAppIcon.astro';
 import { CADASTRO, whatsapp } from '../data/links';
-import { planos, DIAS_TESTE, rotuloProfissionais } from '../data/planos';
+import { planos, DIAS_TESTE, BLACK_FRIDAY, rotuloProfissionais } from '../data/planos';
 
 const inclusos = [
   'Agendamentos ilimitados',
@@ -21,6 +21,14 @@ const inclusos = [
         Todos os planos têm as mesmas funcionalidades. A diferença é só a quantidade de profissionais ativos.
         Não pede cartão.
       </p>
+      {
+        BLACK_FRIDAY && (
+          <p class="lead bf-lead">
+            <strong>Black Friday até {BLACK_FRIDAY.cadastroAte}:</strong> crie a conta até lá e o preço de cada plano
+            fica guardado para sempre.
+          </p>
+        )
+      }
     </div>
 
     <ul class="grid">
@@ -31,7 +39,12 @@ const inclusos = [
             <h3>{p.nome}</h3>
             <p class="resumo">{p.resumo}</p>
             <p class="preco">
-              <span class="valor">R$&nbsp;{p.preco}</span>
+              {BLACK_FRIDAY && (
+                <span class="antes">
+                  <span class="sr-only">Preço normal: </span>R$&nbsp;{p.preco}
+                </span>
+              )}
+              <span class="valor">R$&nbsp;{BLACK_FRIDAY ? p.precoBlackFriday : p.preco}</span>
               <span class="mes">/mês</span>
             </p>
             <p class="limite">
@@ -66,6 +79,12 @@ const inclusos = [
     </ul>
 
     <ul class="notas">
+      {BLACK_FRIDAY && (
+        <li>
+          <Icon name="checkCircle" size={20} />Crie a conta até {BLACK_FRIDAY.cadastroAte} e o preço da Black Friday
+          vale para sempre
+        </li>
+      )}
       <li><Icon name="checkCircle" size={20} />{DIAS_TESTE} dias grátis em toda barbearia nova, criados no cadastro</li>
       <li><Icon name="checkCircle" size={20} />Para assinar ou trocar de plano, fale com a gente pelo WhatsApp</li>
       <li><Icon name="checkCircle" size={20} />Ao fim do teste, seus dados ficam guardados</li>
@@ -141,6 +160,19 @@ const inclusos = [
   .mes {
     color: var(--text-muted);
     font-weight: 500;
+  }
+
+  .antes {
+    color: var(--text-muted);
+    font-size: 1.125rem;
+    font-weight: 500;
+    text-decoration: line-through;
+    margin-right: var(--s-8);
+  }
+
+  .bf-lead {
+    margin-top: var(--s-12);
+    color: var(--text);
   }
 
   .limite {

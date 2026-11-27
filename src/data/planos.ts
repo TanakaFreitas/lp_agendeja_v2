@@ -8,9 +8,23 @@ export interface Plano {
   profissionais: number;
   resumo: string;
   destaque?: boolean;
+  /** Preço que a Black Friday guarda na conta de quem se cadastra até `BLACK_FRIDAY.cadastroAte`. */
+  precoBlackFriday: number;
 }
 
 export const DIAS_TESTE = 30;
+
+/**
+ * Black Friday, decidida pelo dono em 27/11/2026: quem cria a conta até 07/12/2026 guarda, para
+ * sempre, o `precoBlackFriday` do plano (Solo R$ 37, Profissional R$ 67, Barber Pro R$ 97) e mantém
+ * os 30 dias grátis. O app não aplica sozinho: a equipe grava esse valor na adesão ao assinar pelo
+ * WhatsApp. NUNCA escrever "metade" ou "50%": R$ 37 é 55% de R$ 67.
+ * REMOVER em 08/12/2026: troque por `null` e publique; faixa, preços e textos voltam ao normal.
+ */
+export const BLACK_FRIDAY: { cadastroAte: string; aPartirDe: string } | null = {
+  cadastroAte: '07/12',
+  aPartirDe: 'R$ 37',
+};
 
 export const planos: Plano[] = [
   {
@@ -20,6 +34,7 @@ export const planos: Plano[] = [
     profissionais: 1,
     resumo: 'Para quem atende sozinho.',
     destaque: true,
+    precoBlackFriday: 37,
   },
   {
     id: 'profissional',
@@ -27,6 +42,7 @@ export const planos: Plano[] = [
     preco: 97,
     profissionais: 3,
     resumo: 'Para uma equipe pequena.',
+    precoBlackFriday: 67,
   },
   {
     id: 'barber-pro',
@@ -34,6 +50,7 @@ export const planos: Plano[] = [
     preco: 147,
     profissionais: 10,
     resumo: 'Para a casa com várias cadeiras.',
+    precoBlackFriday: 97,
   },
 ];
 

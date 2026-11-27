@@ -1,6 +1,17 @@
 // Perguntas frequentes (BRIEFING §11), tiradas da Ajuda do app.
+import { BLACK_FRIDAY, planos } from './planos';
+
+const precos = planos.map((p) => `${p.nome} R$ ${p.precoBlackFriday}`).join(', ');
 
 export const faq: { pergunta: string; resposta: string }[] = [
+  ...(BLACK_FRIDAY
+    ? [
+        {
+          pergunta: 'O preço da Black Friday vale por quanto tempo?',
+          resposta: `Para sempre. Criando a conta até ${BLACK_FRIDAY.cadastroAte}, você testa 30 dias grátis, sem cartão, e, quando assinar pelo WhatsApp, paga o preço da Black Friday todo mês (${precos}). Quem cria a conta depois dessa data paga o preço normal.`,
+        },
+      ]
+    : []),
   {
     pergunta: 'Preciso instalar alguma coisa?',
     resposta:
