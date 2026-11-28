@@ -1,0 +1,159 @@
+---
+import './mockup.css';
+import Icon from '../Icon.astro';
+
+interface Props {
+  class?: string;
+}
+
+// Mesmo desenho da tela "Caderno do dia" do app (lib/caderno/caderno.dart), com dados fictícios.
+const servicos = [
+  { nome: 'Corte', valor: 'R$ 40,00' },
+  { nome: 'Barba', valor: 'R$ 30,00' },
+  { nome: 'Corte e barba', valor: 'R$ 60,00' },
+  { nome: 'Pezinho', valor: 'R$ 15,00' },
+];
+
+const marcas = [
+  { h: '10:42', serv: 'Corte e barba', prof: 'Diego', forma: 'Dinheiro', valor: 'R$ 60,00', desfazer: true },
+  { h: '10:20', serv: 'Corte', prof: 'Marcos', forma: 'Cartão', valor: 'R$ 40,00' },
+  { h: '09:58', serv: 'Barba', prof: 'Diego', forma: 'Dinheiro', valor: 'R$ 30,00' },
+];
+---
+
+<div
+  class:list={['phone', Astro.props.class]}
+  role="img"
+  aria-label="Tela Caderno do dia: quantos atendimentos e quanto rendeu hoje e no mês, a escolha de quem atendeu, os botões dos serviços para marcar o atendimento que acabou de fazer e as marcas de hoje com a hora."
+>
+  <div class="m-screen">
+    <div class="m-appbar">
+      <Icon name="arrowLeft" />
+      <span class="m-appbar-title">Caderno do dia</span>
+    </div>
+    <div class="m-body">
+      <div class="placar">
+        <div class="m-card conta">
+          <span class="m-small m-muted">Hoje</span>
+          <span class="num">9</span>
+          <span class="m-small m-muted">atendimentos</span>
+          <span class="m-gold">R$ 380,00</span>
+        </div>
+        <div class="m-card conta">
+          <span class="m-small m-muted">No mês</span>
+          <span class="num">214</span>
+          <span class="m-small m-muted">atendimentos</span>
+          <span class="m-strong">R$ 8.930,00</span>
+        </div>
+      </div>
+
+      <span class="m-caps">Quem atendeu</span>
+      <div class="m-row chips">
+        <span class="m-chip m-chip--on">Diego</span>
+        <span class="m-chip">Marcos</span>
+      </div>
+
+      <span class="m-caps">Marcar atendimento</span>
+      <span class="m-small m-muted dica">Toque no serviço que acabou de fazer.</span>
+      <div class="servicos">
+        {
+          servicos.map((s) => (
+            <span class="m-card servico">
+              <Icon name="scissors" size={16} />
+              <span class="m-strong">{s.nome}</span>
+              <span class="m-small m-muted">{s.valor}</span>
+            </span>
+          ))
+        }
+      </div>
+
+      <span class="m-caps">Hoje · 9 atendimentos</span>
+      <div class="m-card lista">
+        {
+          marcas.map((m) => (
+            <div class="m-row item">
+              <span class="hora">{m.h}</span>
+              <span class="m-grow">
+                <span class="m-strong" style="display:block">{m.serv}</span>
+                <span class="m-small m-muted">
+                  {m.prof} · {m.forma}
+                </span>
+              </span>
+              {m.desfazer ? <span class="m-chip">Desfazer</span> : <span class="m-small m-strong">{m.valor}</span>}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .placar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .conta {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .num {
+    font-family: var(--font-title);
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .chips {
+    gap: 6px;
+    margin-top: -4px;
+  }
+
+  .dica {
+    margin-top: -6px;
+  }
+
+  .servicos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .servico {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+  }
+
+  .servico :global(svg) {
+    color: var(--secondary);
+    margin-bottom: 2px;
+  }
+
+  .lista {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .item {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .item:last-child {
+    border-bottom: 0;
+  }
+
+  .hora {
+    min-width: 38px;
+    font-family: var(--font-title);
+    font-size: 13px;
+    font-weight: 700;
+  }
+</style>

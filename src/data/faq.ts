@@ -13,6 +13,11 @@ export const faq: { pergunta: string; resposta: string }[] = [
       ]
     : []),
   {
+    pergunta: 'Não trabalho com agendamento, atendo por ordem de chegada. Serve para mim?',
+    resposta:
+      'Serve. No “Caderno do dia”, terminou o atendimento, você toca no serviço e na forma de pagamento, e ele está contado, sem horário e sem cadastrar o cliente. Lá em cima aparecem quantos atendimentos e quanto rendeu hoje e no mês, e cada marca entra em Recebimentos. Se um dia quiser, dá para usar a agenda junto.',
+  },
+  {
     pergunta: 'Preciso instalar alguma coisa?',
     resposta:
       'Não. O Agende Já funciona no navegador do celular ou do computador. Se quiser, adicione o ícone na tela inicial e ele abre como app: no iPhone pelo Safari, no Android pelo Chrome, no computador pelo Chrome ou pelo Edge.',
@@ -65,6 +70,6 @@ export const faq: { pergunta: string; resposta: string }[] = [
   {
     pergunta: 'Funciona para salão de beleza?',
     resposta:
-      'Sim. Serve para qualquer negócio que atende com hora marcada por profissional. O Agende Já nasceu para barbearia, e a linguagem dele é de barbearia.',
+      'Sim. Serve para qualquer negócio que atende por profissional, com hora marcada ou por ordem de chegada. O Agende Já nasceu para barbearia, e a linguagem dele é de barbearia.',
   },
 ];
