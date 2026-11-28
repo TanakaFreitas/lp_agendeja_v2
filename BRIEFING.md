@@ -6,6 +6,8 @@ contrato: fatos do produto, links, preços, identidade visual e o que **não**
 pode ser prometido. Foi levantado em 20/10/2026 direto do código e do banco do
 app (repositório `C:\projetosApp\agende_flutter`). Atualizado em 26/10/2026 com o
 fechamento semanal e mensal por WhatsApp (§4), que roda no n8n e não está no repositório do app.
+Atualizado em 28/11/2026 com o **Caderno do dia** (§4), para quem atende por ordem de chegada
+(agende_flutter #113 e #114).
 
 Regra de ouro: **a página só promete o que o app faz hoje.** Na dúvida sobre
 uma funcionalidade, pergunte ao usuário antes de escrever.
@@ -19,6 +21,8 @@ uma funcionalidade, pergunte ao usuário antes de escrever.
   WhatsApp.
 - **Público:** dono de barbearia pequena ou média, no Brasil. Vive no celular e
   no WhatsApp, agenda hoje por mensagem, caderno ou de cabeça. Não é técnico.
+  Inclui quem **não trabalha com agendamento** e atende por ordem de chegada: para
+  esse, a oferta é o Caderno do dia (§4).
 - **Idioma:** só português do Brasil.
 
 ## 2. O produto
@@ -26,7 +30,8 @@ uma funcionalidade, pergunte ao usuário antes de escrever.
 **Agende Já** é um sistema de agendamento e gestão para barbearias. O cliente
 agenda pelo link da barbearia (com conta ou só com nome e telefone) e recebe a
 mensagem no WhatsApp. A barbearia controla agenda, profissionais, clientes,
-planos de assinatura e o que recebeu. Todo domingo e todo dia 1º, o dono recebe no WhatsApp
+planos de assinatura e o que recebeu. Quem atende por ordem de chegada, sem
+agenda, conta cada atendimento no **Caderno do dia** (§4). Todo domingo e todo dia 1º, o dono recebe no WhatsApp
 o fechamento da semana ou do mês, com uma análise escrita por IA (§4).
 
 - Funciona **no navegador** do celular ou do computador, e **instala na tela
@@ -87,6 +92,26 @@ Use estas, com estas palavras. Entre aspas, os rótulos reais dos botões no app
 - Lançou errado? "Estornar lançamento", com motivo. O estornado sai da soma e
   continua visível em "Estornados".
 - ⚠ É **registro**, não cobrança. O app não cobra ninguém.
+
+**Caderno do dia** (desde 27/11/2026; vale um bloco próprio na página, `#caderno`)
+- Para a barbearia que **atende por ordem de chegada**, sem agendamento. Fica no menu
+  (seção Agenda) e num atalho da tela inicial; só o administrador usa. Não precisa ligar nada.
+- Terminou o atendimento: toca no **serviço** (os botões são os serviços ativos, com o preço do
+  dia, promoção incluída) e na **forma de pagamento**. Pronto, está contado, com a hora. Com mais
+  de um profissional ativo, escolhe antes em "Quem atendeu".
+- **Sem cliente e sem horário:** não cadastra quem foi atendido (aparece "Cliente do balcão"),
+  não ocupa horário na agenda e não manda mensagem a ninguém.
+- Placar com quantos atendimentos e quanto rendeu **hoje e no mês**; o dia mostra também a divisão
+  por serviço e por barbeiro e a lista das marcas com a hora.
+- Cada marca entra em **Recebimentos** (selo "Caderno") e na tela inicial ("já atendidos").
+  "Desfazer" logo depois de marcar; tocando na marca, corrige o valor ou estorna.
+- Convive com a agenda: quem marcou pelo link fica na agenda, quem chegou sem marcar vai no Caderno.
+- ⚠ **Não é fila de espera:** o cliente não vê nada, não entra numa fila nem recebe aviso. Não
+  prometa fila virtual, senha, "veja quantos estão na frente" nem cadastro de quem chegou.
+- ⚠ Até agende_flutter #115 entrar no ar, o **fechamento no WhatsApp não conta o Caderno** (e
+  barbearia só com marcas no Caderno não recebe fechamento). Não diga o contrário antes disso.
+- Não confunda com a dor "agenda no caderno" (§9): o caderno de papel é a dor; o Caderno do dia é
+  o app. Diga "troque o caderno de papel pelo Caderno do dia".
 
 **Fechamento semanal e mensal no WhatsApp** (diferencial; vale um bloco próprio na
 página). Lido em 26/10/2026 nos fluxos do n8n "Relatório Semanal Automático V2" e
@@ -321,6 +346,8 @@ Copie de `C:\projetosApp\agende_flutter` para `public/`:
 5. **Para o seu cliente:** agenda sem criar conta, WhatsApp de confirmação e
    lembrete, cancela sozinho dentro do prazo.
 6. **Para a sua barbearia:** grade de funcionalidades (§4), agrupadas.
+   **Caderno do dia** (`#caderno`): seção curta para quem atende por ordem de chegada, com o
+   mockup da tela (§4).
 7. **Planos de assinatura para os seus clientes:** seção-destaque. Fidelize
    com plano mensal e controle os créditos sem planilha.
    **Fechamento no WhatsApp:** seção curta, com o mockup das duas mensagens (§4).
@@ -358,8 +385,12 @@ Tiradas da Ajuda do app. Pode reescrever o estilo, sem mudar o fato.
   agendamento no período, não chega nada. (Confirme a marca `is_relatorio`, §4.)
 - **A análise da IA é confiável?** Ela interpreta os números do relatório e serve como segunda
   opinião. Pode errar e não substitui contador nem consultor.
+- **Não trabalho com agendamento, atendo por ordem de chegada. Serve para mim?** Serve. No
+  "Caderno do dia", terminou o atendimento, toque no serviço e na forma de pagamento: está
+  contado, sem horário e sem cadastrar o cliente. Mostra quantos atendimentos e quanto rendeu
+  hoje e no mês, e cada marca entra em Recebimentos. Dá para usar a agenda junto.
 - **Funciona para salão de beleza?** Sim, serve para qualquer negócio que
-  atende com hora marcada por profissional. O produto nasceu para barbearia, e
+  atende por profissional, com hora marcada ou por ordem de chegada. O produto nasceu para barbearia, e
   a linguagem dele é de barbearia.
 
 ## 12. Requisitos técnicos

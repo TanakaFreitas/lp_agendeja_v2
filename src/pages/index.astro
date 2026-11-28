@@ -6,6 +6,7 @@ import Dores from '../components/Dores.astro';
 import ComoFunciona from '../components/ComoFunciona.astro';
 import ParaCliente from '../components/ParaCliente.astro';
 import ParaBarbearia from '../components/ParaBarbearia.astro';
+import CadernoDoDia from '../components/CadernoDoDia.astro';
 import PlanosAssinatura from '../components/PlanosAssinatura.astro';
 import Fechamento from '../components/Fechamento.astro';
 import Precos from '../components/Precos.astro';
@@ -15,7 +16,7 @@ import Footer from '../components/Footer.astro';
 import { DIAS_TESTE, BLACK_FRIDAY } from '../data/planos';
 
 const title = 'Agende Já — agendamento online para barbearias';
-const description = `Seu cliente agenda sozinho pelo link da barbearia e recebe confirmação e lembrete no WhatsApp. Agenda, profissionais, planos de assinatura, recebimentos e o fechamento da semana no WhatsApp num lugar só. Teste grátis por ${DIAS_TESTE} dias, sem cartão.${BLACK_FRIDAY ? ` Black Friday até ${BLACK_FRIDAY.cadastroAte}: a partir de ${BLACK_FRIDAY.aPartirDe} por mês, para sempre.` : ''}`;
+const description = `Seu cliente agenda sozinho pelo link da barbearia e recebe confirmação e lembrete no WhatsApp. Agenda, profissionais, planos de assinatura, recebimentos e o fechamento da semana no WhatsApp num lugar só. Atende por ordem de chegada? Marque cada corte no Caderno do dia, sem agenda. Teste grátis por ${DIAS_TESTE} dias, sem cartão.${BLACK_FRIDAY ? ` Black Friday até ${BLACK_FRIDAY.cadastroAte}: a partir de ${BLACK_FRIDAY.aPartirDe} por mês, para sempre.` : ''}`;
 ---
 
 <Base title={title} description={description}>
@@ -26,6 +27,7 @@ const description = `Seu cliente agenda sozinho pelo link da barbearia e recebe 
     <ComoFunciona />
     <ParaCliente />
     <ParaBarbearia />
+    <CadernoDoDia />
     <PlanosAssinatura />
     <Fechamento />
     <Precos />

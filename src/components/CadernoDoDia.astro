@@ -1,0 +1,158 @@
+---
+import Icon, { type IconName } from './Icon.astro';
+import MockCaderno from './mockups/MockCaderno.astro';
+
+// "Caderno do dia" do app (BRIEFING §4): para quem atende por ordem de chegada, sem agenda.
+const pontos: { icon: IconName; titulo: string; texto: string }[] = [
+  {
+    icon: 'zap',
+    titulo: 'Dois toques depois do corte',
+    texto:
+      'Terminou o atendimento? Toque no serviço que acabou de fazer e em como o cliente pagou. Pronto: está contado, com a hora.',
+  },
+  {
+    icon: 'user',
+    titulo: 'Sem cadastrar cliente',
+    texto:
+      'Não precisa de nome, telefone nem horário. O cliente chega, espera a vez e senta na cadeira, como sempre.',
+  },
+  {
+    icon: 'wallet',
+    titulo: 'Quanto rendeu, hoje e no mês',
+    texto:
+      'Lá em cima, quantos atendimentos e quanto entrou hoje e no mês. Com mais de um barbeiro, escolha quem atendeu e veja o dia por serviço e por barbeiro.',
+  },
+  {
+    icon: 'check',
+    titulo: 'Entra nos Recebimentos',
+    texto:
+      'Cada marca aparece em Recebimentos, junto com os atendimentos da agenda. Marcou errado? Toque em “Desfazer” logo depois, ou corrija o valor.',
+  },
+];
+---
+
+<section id="caderno" class="section" aria-labelledby="caderno-title">
+  <div class="container grid">
+    <div>
+      <div class="section-head">
+        <span class="eyebrow">Caderno do dia</span>
+        <h2 id="caderno-title" class="section-title">
+          Atende por ordem de chegada? Conte cada corte em dois toques, sem agenda
+        </h2>
+        <p class="lead">
+          Nem toda barbearia trabalha com hora marcada. Se o seu cliente chega e espera a vez, troque o caderno de papel
+          pelo Caderno do dia: um toque no serviço, outro na forma de pagamento, e o dia fica anotado.
+        </p>
+      </div>
+
+      <ul class="pontos">
+        {
+          pontos.map((p) => (
+            <li class="card ponto">
+              <span class="icon-badge">
+                <Icon name={p.icon} />
+              </span>
+              <h3>{p.titulo}</h3>
+              <p>{p.texto}</p>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="obs">
+        <Icon name="notebook" size={20} />
+        <span>
+          Dá para usar junto com a agenda: quem marcou horário pelo link fica na agenda, e quem chegou sem marcar entra
+          no Caderno do dia.
+        </span>
+      </p>
+    </div>
+
+    <div class="visual">
+      <MockCaderno />
+      <p class="caption">Exemplo ilustrativo, com dados fictícios</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    gap: var(--s-48);
+  }
+
+  .section-head {
+    margin-bottom: var(--s-32);
+  }
+
+  .visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-12);
+  }
+
+  .visual :global(.phone) {
+    max-width: 280px;
+  }
+
+  .caption {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+  }
+
+  .pontos {
+    list-style: none;
+    display: grid;
+    gap: var(--s-16);
+  }
+
+  .ponto {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-8);
+    padding: var(--s-24);
+  }
+
+  .ponto .icon-badge {
+    margin-bottom: var(--s-4);
+  }
+
+  h3 {
+    font-size: 1.125rem;
+  }
+
+  .ponto p {
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+  }
+
+  .obs {
+    display: flex;
+    gap: var(--s-12);
+    align-items: flex-start;
+    margin-top: var(--s-24);
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+  }
+
+  .obs :global(svg) {
+    flex: none;
+    margin-top: 2px;
+    color: var(--text);
+  }
+
+  @media (min-width: 640px) {
+    .pontos {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 960px) {
+    .grid {
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+      align-items: center;
+      gap: var(--s-64);
+    }
+  }
+</style>
